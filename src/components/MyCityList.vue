@@ -1,5 +1,5 @@
 <template>
-  <v-card class="width-100pc">City List</v-card>
+  <v-card class="width-100pc height-100pc">City List</v-card>
 </template>
 
 <style lang="scss" scoped>

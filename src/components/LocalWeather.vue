@@ -1,5 +1,5 @@
 <template>
-  <v-card class="width-100pc">Local Weather</v-card>
+  <v-card class="width-100pc height-100pc">Local Weather</v-card>
 </template>
 
 <style lang="scss" scoped>
@@ -9,4 +9,3 @@
 <script>
 export default {};
 </script>
-
