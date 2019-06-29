@@ -21,14 +21,12 @@
 </template>
 
 <script>
-import Header from "@/components/header/Header.vue";
 import LocalWeather from "@/components/LocalWeather.vue";
 import MyCityList from "@/components/MyCityList.vue";
 import ViewWeather from "@/components/ViewWeather.vue";
 export default {
   name: "home",
   components: {
-    "vw-header": Header,
     ViewWeather,
     LocalWeather,
     MyCityList

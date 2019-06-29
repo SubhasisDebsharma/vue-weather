@@ -45,7 +45,7 @@ const mutations = {
   }
 };
 
-export const cities = {
+export const loginStore = {
   state,
   getters,
   actions,

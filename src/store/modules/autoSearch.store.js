@@ -51,7 +51,7 @@ const actions = {
   getCitiesForAutoSearch(context, payload) {
     // Api call to get all loaded cities
     // call google auto search api
-    context.commit("addToAutoSearchList", cities);
+    context.commit("addToAutoSearchList", []);
   }
 };
 
@@ -62,7 +62,7 @@ const mutations = {
   }
 };
 
-export const cities = {
+export const autoSearchStore = {
   state,
   getters,
   actions,

@@ -50,7 +50,7 @@ const mutations = {
   }
 };
 
-export const cities = {
+export const weatherStore = {
   state,
   getters,
   actions,

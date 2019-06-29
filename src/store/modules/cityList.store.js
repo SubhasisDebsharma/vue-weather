@@ -25,7 +25,7 @@ const mutations = {
   }
 };
 
-export const cities = {
+export const cityListStore = {
   state,
   getters,
   actions,

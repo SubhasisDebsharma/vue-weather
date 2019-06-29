@@ -2,15 +2,25 @@
   <div>
     <v-toolbar fixed app class="header">
       <a href="#" @click="onLogoClick()">
-        <img class="header__logo" :src="image" alt="VueWeather">
+        <img class="header__logo" :src="image" alt="VueWeather" />
       </a>
 
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon :class="{ hidden: !smAndDown }" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        :class="{ hidden: !smAndDown }"
+        @click.stop="drawer = !drawer"
+      ></v-toolbar-side-icon>
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
-          <v-avatar color="grey lighten-4" v-on="on" :class="{ hidden: smAndDown }">
-            <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="avatar">
+          <v-avatar
+            color="grey lighten-4"
+            v-on="on"
+            :class="{ hidden: smAndDown }"
+          >
+            <img
+              src="https://randomuser.me/api/portraits/men/85.jpg"
+              alt="avatar"
+            />
           </v-avatar>
         </template>
         <span>John Leider</span>
