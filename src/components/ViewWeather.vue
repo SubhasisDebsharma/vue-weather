@@ -1,8 +1,11 @@
 <template>
-  <div>View Weather</div>
+  <v-card class="width-100pc height-100pc">View Weather</v-card>
 </template>
 
-<script>
+<style lang="scss" scoped>
+@import "../styles/class";
+</style>
+
 export default {};
 </script>
 

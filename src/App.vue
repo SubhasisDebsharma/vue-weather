@@ -1,6 +1,12 @@
 <template>
   <div id="app">
-    <router-view />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
+      rel="stylesheet"
+    />
+    <v-app id="inspire">
+      <router-view></router-view>
+    </v-app>
   </div>
 </template>
 
