@@ -58,9 +58,6 @@ exports.searchCities = functions.https.onRequest((req, res) => {
     .startAt(properInput)
     .limitToFirst(10)
     .on("value", data => {
-      const response = Object.keys(data).map(k => data[k]);
-      console.log(data);
-      console.log(response);
       res.send(data);
     });
 });
