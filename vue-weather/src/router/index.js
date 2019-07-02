@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index";
 
 Vue.use(Router);
 
@@ -26,7 +27,14 @@ export default new Router({
       path: "/login",
       name: "login",
       component: () =>
-        import(/* webpackChunkName: "login" */ "../components/Login.vue")
+        import(/* webpackChunkName: "login" */ "../components/Login.vue"),
+      beforeEnter: (to, from, next) => {
+        if (store.getters.isLoggedIn) {
+          next({ name: "home" });
+        } else {
+          next();
+        }
+      }
     },
     {
       path: "*",

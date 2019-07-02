@@ -1,39 +1,32 @@
 <template>
   <div>
     <v-toolbar fixed app class="header">
-      <a href="#" @click="onLogoClick()">
+      <router-link :to="{ name: 'home' }" title="View Weather">
         <img class="header__logo" :src="image" alt="VueWeather" />
-      </a>
-
+      </router-link>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon
-        :class="{ hidden: !smAndDown }"
-        @click.stop="drawer = !drawer"
-      ></v-toolbar-side-icon>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on }">
-          <v-avatar
-            color="grey lighten-4"
-            v-on="on"
-            :class="{ hidden: smAndDown }"
-          >
-            <img
-              src="https://randomuser.me/api/portraits/men/85.jpg"
-              alt="avatar"
-            />
-          </v-avatar>
-        </template>
-        <span>John Leider</span>
-      </v-tooltip>
+      <v-toolbar-side-icon :class="{ hidden: !smAndDown }" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+
+      <v-avatar
+        v-if="isLoggedIn"
+        color="grey lighten-4"
+        :class="{ hidden: smAndDown }"
+        title="John Leider"
+      >
+        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="avatar" />
+      </v-avatar>
+
       <div class="space" :class="{ hidden: smAndDown }"></div>
-      <v-tooltip bottom margin-left>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" :class="{ hidden: smAndDown }">
-            <v-icon color="red">logout</v-icon>
-          </v-btn>
-        </template>
-        <span>Logout</span>
-      </v-tooltip>
+
+      <v-btn @click="logout()" title="Logout" v-if="isLoggedIn" icon :class="{ hidden: smAndDown }">
+        <v-icon color="danger">fa-sign-out-alt</v-icon>
+      </v-btn>
+
+      <router-link class="txt-dec-none" :to="{ name: 'login' }">
+        <v-btn title="Login" v-if="!isLoggedIn" color="primary" icon :class="{ hidden: smAndDown }">
+          <v-icon>fa-sign-in-alt</v-icon>
+        </v-btn>
+      </router-link>
     </v-toolbar>
 
     <v-navigation-drawer v-model="drawer" absolute temporary>
@@ -46,7 +39,7 @@
 @import "../../styles/class";
 @import "../../styles/variables";
 .header {
-  background: linear-gradient(135deg, $darkblue, $lightBlue, transparent);
+  background: $headerBgColor;
   .header__logo {
     width: 5rem;
     max-width: 120px;
@@ -56,7 +49,7 @@
 
 <script>
 import DrawerContent from "./DrawerContent";
-import { harlemShake } from "@/fun/harlemShake.js";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data: () => ({
     drawer: null,
@@ -75,15 +68,14 @@ export default {
     },
     xsOnly: function() {
       return this.$vuetify.breakpoint.xsOnly;
-    }
+    },
+    ...mapGetters(["isLoggedIn"])
   },
   props: {
     source: String
   },
   methods: {
-    onLogoClick: function() {
-      harlemShake();
-    }
+    ...mapActions(["logout"])
   }
 };
 </script>

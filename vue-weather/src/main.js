@@ -6,7 +6,14 @@ import store from "./store/";
 import "./registerServiceWorker";
 import "vuetify/dist/vuetify.min.css";
 import Vuetify from "vuetify";
-Vue.use(Vuetify);
+import "@fortawesome/fontawesome-free/css/all.css";
+import firebaseApp from "./auth/firebase.js";
+
+firebaseApp.initializeApp();
+
+Vue.use(Vuetify, {
+  iconfont: "fa"
+});
 Vue.config.productionTip = false;
 
 new Vue({

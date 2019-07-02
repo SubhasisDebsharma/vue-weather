@@ -18,15 +18,25 @@
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
   // text-align: center;
-  font-size: 1.6rem;
+  // font-size: 1.6rem;
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: $color1;
 }
 </style>
 
 <script>
 import Header from "@/components/header/Header.vue";
+import { mapActions } from "vuex";
 export default {
   components: {
     "vw-header": Header
+  },
+  methods: {
+    ...mapActions(["silentLogin"])
+  },
+  mounted: function() {
+    this.silentLogin();
   }
 };
 </script>
