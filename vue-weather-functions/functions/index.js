@@ -32,24 +32,35 @@ exports.helloWorld = functions.https.onRequest((req, res) => {
 });
 
 exports.setLowerString = functions.https.onRequest((req, res) => {
-  admin
-    .database()
-    .ref("cities")
-    .limitToFirst(1)
-    .on("value", (data, b) => {
-      console.log("data", data, b);
-      res.send(data);
-    });
+  // admin
+  //   .database()
+  //   .ref("cities")
+  //   .limitToFirst(1)
+  //   .on("value", (data, b) => {
+  //     console.log("data", data, b);
+  //     res.send(data);
+  //   });
+  res.send("not implementd");
 });
 
 exports.searchCities = functions.https.onRequest((req, res) => {
-  const input = req.body;
+  const input = req.query && req.query.input;
+  const properInput = input
+    .split(" ")
+    .map(str => {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    })
+    .join(" ");
   admin
     .database()
     .ref("cities")
-    .transaction();
-  admin
-    .database()
-    .ref("cities")
-    .res.send("api to search citiy. your query = " + req.body);
+    .orderByChild("name")
+    .startAt(properInput)
+    .limitToFirst(10)
+    .on("value", data => {
+      const response = Object.keys(data).map(k => data[k]);
+      console.log(data);
+      console.log(response);
+      res.send(data);
+    });
 });
