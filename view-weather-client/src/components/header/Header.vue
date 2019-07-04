@@ -59,7 +59,7 @@
 .header {
   background: $headerBgColor;
   .header__logo {
-    width: 5rem;
+    width: 7rem;
     max-width: 120px;
   }
 }

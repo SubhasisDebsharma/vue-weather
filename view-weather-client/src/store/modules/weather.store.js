@@ -1,59 +1,96 @@
-import axios from "axios";
-import apis from "../../constants/apis";
+// import axios from "axios";
+// import apis from "../../constants/apis";
 
 const state = {
-  searchedWeather: null,
+  searchedCity: null,
+  searchedWeatherForcust: null,
+  searchedWeatherForcustLoading: false,
+  searchedCurrentWeather: null,
+  searchedCurrentWeatherLoading: false,
   localWeather: null,
-  weatherAPILoading: true
+  localWeatherLoading: true
 };
 
 const getters = {
-  searchedWeather: state => state.searchedWeather,
+  searchedCity: state => state.searchedCity,
+  searchedWeatherForcust: state => state.searchedWeatherForcust,
+  searchedWeatherForcustLoading: state => state.searchedWeatherForcustLoading,
+  searchedCurrentWeather: state => state.searchedCurrentWeather,
+  searchedCurrentWeatherLoading: state => state.searchedCurrentWeatherLoading,
   localWeather: state => state.localWeather,
-  weatherAPILoading: state => state.weatherAPILoading
+  localWeatherLoading: state => state.localWeatherLoading
 };
 
 const actions = {
-  // eslint-disable-next-line no-unused-vars
   getSearchWeather(context, payload) {
-    context.commit("weatherAPILoading", true);
+    context.commit("searchedCity", payload);
+    context.commit("searchedWeatherForcustLoading", true);
     import("../../assets/json/fiveDaysWeather.json").then(
       data => {
         console.log(data);
-        context.commit("weatherAPILoading", false);
-        context.commit("addSearchedWeather", data);
+        context.commit("searchedWeatherForcustLoading", false);
+        context.commit("searchedWeatherForcust", data);
       },
       err => {
         console.log(err);
-        context.commit("weatherAPILoading", false);
-        context.commit("addSearchedWeather", null);
+        context.commit("searchedWeatherForcustLoading", false);
+        context.commit("searchedWeatherForcust", null);
+      }
+    );
+    context.commit("searchedCurrentWeatherLoading", true);
+    import("../../assets/json/currentWeather.json").then(
+      data => {
+        console.log(data);
+        context.commit("searchedCurrentWeatherLoading", false);
+        context.commit("searchedCurrentWeather", data);
+      },
+      err => {
+        console.log(err);
+        context.commit("searchedCurrentWeatherLoading", false);
+        context.commit("searchedCurrentWeather", null);
       }
     );
   },
   // eslint-disable-next-line no-unused-vars
   loadLocalWeather(context, payload) {
     // Api call to get all loaded cities
-    axios.get(apis.sampleLocalWeather).then(
+    context.commit("localWeatherLoading", true);
+    import("../../assets/json/currentWeather.json").then(
       data => {
-        context.commit("addLocalWeather", data);
+        console.log(data);
+        context.commit("localWeatherLoading", false);
+        context.commit("localWeather", data);
       },
       err => {
         console.log(err);
-        context.commit("addLocalWeather", null);
+        context.commit("localWeatherLoading", false);
+        context.commit("localWeather", null);
       }
     );
   }
 };
 
 const mutations = {
-  addSearchedWeather(state, payload) {
-    state.searchedWeather = payload;
+  searchedCity(state, payload) {
+    state.searchedCity = payload;
   },
-  addLocalWeather(state, payload) {
+  searchedWeatherForcust(state, payload) {
+    state.searchedWeatherForcust = payload;
+  },
+  searchedWeatherForcustLoading(state, payload) {
+    state.searchedWeatherForcustLoading = payload;
+  },
+  searchedCurrentWeather(state, payload) {
+    state.searchCurrentWeather = payload;
+  },
+  searchedCurrentWeatherLoading(state, payload) {
+    state.searchCurrentWeatherLoading = payload;
+  },
+  localWeather(state, payload) {
     state.localWeather = payload;
   },
-  weatherAPILoading(state, payload) {
-    state.weatherAPILoading = payload;
+  localWeatherLoading(state, payload) {
+    state.localWeatherLoading = payload;
   }
 };
 

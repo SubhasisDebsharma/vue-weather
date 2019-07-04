@@ -1,5 +1,8 @@
 <template>
-  <v-card class="width-100pc height-100pc">Local Weather</v-card>
+  <v-card class="width-100pc height-100pc">
+    Local Weather
+    <current-weather></current-weather>
+  </v-card>
 </template>
 
 <style lang="scss" scoped>
@@ -7,5 +10,10 @@
 </style>
 
 <script>
-export default {};
+import CurrentWeather from "./CurrentWeather";
+export default {
+  components: {
+    CurrentWeather
+  }
+};
 </script>

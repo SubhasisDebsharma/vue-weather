@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-container class="vw-home" fluid fill-height>
-      <v-layout wrap align-space-between justify-space-around row fill-height>
+      <v-layout wrap align-space-between row fill-height>
         <v-flex xs12 md8 pa-1>
           <view-weather class="vw-home--view-weather"></view-weather>
         </v-flex>
@@ -21,6 +21,7 @@
 </template>
 
 <style lang="scss" scoped>
+@import "../styles/class";
 .vw-home {
   .vw-home--view-weather {
     animation: hightOut 700ms ease;

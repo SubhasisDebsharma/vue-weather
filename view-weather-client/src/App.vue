@@ -19,8 +19,7 @@
   // -webkit-font-smoothing: antialiased;
   // -moz-osx-font-smoothing: grayscale;
   // text-align: center;
-  // font-size: 1.6rem;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 300;
   color: $color1;
 }

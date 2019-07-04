@@ -108,10 +108,10 @@ export default {
   .view-weather {
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 1.7rem;
+    font-size: 2.6rem;
     color: white;
     text-shadow: 0px 2px 10px black;
-    letter-spacing: 1.5rem;
+    letter-spacing: 1.6rem;
     text-align: center;
     filter: opacity(1);
     animation: moveInBottomTilt 1s ease-out 0.5s;
@@ -120,6 +120,7 @@ export default {
   .login-text {
     .login-text--ad {
       text-transform: uppercase;
+      font-size: 2rem;
       padding-top: 1rem;
     }
   }

@@ -26,23 +26,32 @@ export default {
     firstText: function() {
       const text = this.text || "";
       const highLightText = this.highLight || "";
-      const startIndex = text.indexOf(highLightText);
+      const lowText = text.toLowerCase();
+      const lowHighLightText = highLightText.toLowerCase();
+
+      const startIndex = lowText.indexOf(lowHighLightText);
       const firstText = text.substring(0, startIndex);
       return firstText;
     },
     matchedText: function() {
       const text = this.text || "";
       const highLightText = this.highLight || "";
-      const startIndex = text.indexOf(highLightText);
-      const endIndex = startIndex + highLightText.length;
+      const lowText = text.toLowerCase();
+      const lowHighLightText = highLightText.toLowerCase();
+
+      const startIndex = lowText.indexOf(lowHighLightText);
+      const endIndex = startIndex + lowHighLightText.length;
       const matchedText = text.substring(startIndex, endIndex);
       return matchedText;
     },
     lastText: function() {
       const text = this.text || "";
       const highLightText = this.highLight || "";
-      const startIndex = text.indexOf(highLightText);
-      const endIndex = startIndex + highLightText.length;
+      const lowText = text.toLowerCase();
+      const lowHighLightText = highLightText.toLowerCase();
+
+      const startIndex = lowText.indexOf(lowHighLightText);
+      const endIndex = startIndex + lowHighLightText.length;
       const lastText = text.substring(endIndex);
       return lastText;
     }

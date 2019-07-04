@@ -1,0 +1,9 @@
+.country {
+  background: $countryColor1;
+  padding: 2px;
+  color: $white;
+  border-radius: 2px;
+  border: 1px solid $countryColor2;
+  filter: drop-shadow(2px 2px 2px $gray);
+  margin-right: 1rem;
+}
