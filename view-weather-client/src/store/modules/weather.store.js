@@ -3,31 +3,35 @@ import apis from "../../constants/apis";
 
 const state = {
   searchedWeather: null,
-  localWeather: null
+  localWeather: null,
+  weatherAPILoading: true
 };
 
 const getters = {
   searchedWeather: state => state.searchedWeather,
-  localWeather: state => state.localWeather
+  localWeather: state => state.localWeather,
+  weatherAPILoading: state => state.weatherAPILoading
 };
 
 const actions = {
   // eslint-disable-next-line no-unused-vars
   getSearchWeather(context, payload) {
-    // get weather form weather api with lat lang
-
-    axios.get(apis.sampleFiveDaysWeather).then(
+    context.commit("weatherAPILoading", true);
+    import("../../assets/json/fiveDaysWeather.json").then(
       data => {
+        console.log(data);
+        context.commit("weatherAPILoading", false);
         context.commit("addSearchedWeather", data);
       },
       err => {
         console.log(err);
+        context.commit("weatherAPILoading", false);
         context.commit("addSearchedWeather", null);
       }
     );
   },
   // eslint-disable-next-line no-unused-vars
-  loadCities(context, payload) {
+  loadLocalWeather(context, payload) {
     // Api call to get all loaded cities
     axios.get(apis.sampleLocalWeather).then(
       data => {
@@ -47,6 +51,9 @@ const mutations = {
   },
   addLocalWeather(state, payload) {
     state.localWeather = payload;
+  },
+  weatherAPILoading(state, payload) {
+    state.weatherAPILoading = payload;
   }
 };
 

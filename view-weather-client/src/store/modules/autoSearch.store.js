@@ -1,51 +1,36 @@
-// import axios from "axios";
-// import apis from "../../constants/apis";
+import axios from "axios";
+import apis from "../../constants/apis";
 
 const state = {
-  autoSearchList: null
+  autoSearchList: [],
+  searchAPIProgress: false
 };
 
 const getters = {
-  autoSearchList: state => state.autoSearchList
+  autoSearchList: state => state.autoSearchList,
+  searchAPIProgress: state => state.searchAPIProgress
 };
 
 const actions = {
-  // eslint-disable-next-line no-unused-vars
   loadAutoSearch(context, payload) {
-    // get weather form weather api with lat lang
-    // call api to get get all the cities. should use index db to store the list
-    const cities = [
-      {
-        id: 707860,
-        name: "Hurzuf",
-        country: "UA",
-        coord: {
-          lon: 34.283333,
-          lat: 44.549999
-        }
-      },
-      {
-        id: 519188,
-        name: "Novinki",
-        country: "RU",
-        coord: {
-          lon: 37.666668,
-          lat: 55.683334
-        }
-      },
-      {
-        id: 1283378,
-        name: "Gorkhā",
-        country: "NP",
-        coord: {
-          lon: 84.633331,
-          lat: 28
-        }
-      }
-    ];
-    // as the list is huge better to make a mapping of first 3 laters of city to the city details array
-    // to optimise the performace, better to use web worker to create the mapping because the array will be huge
-    context.commit("addToAutoSearchList", cities);
+    const url = apis.cityAutoComplete;
+    const query = {
+      input: payload
+    };
+    context.commit("setSearchAPIProgress", true);
+    axios
+      .get(url, {
+        params: query
+      })
+      .then(response => {
+        const cities = Object.values(response.data);
+        context.commit("addToAutoSearchList", cities);
+        context.commit("setSearchAPIProgress", false);
+      })
+      .catch(error => {
+        console.log(error);
+        context.commit("setSearchAPIProgress", false);
+      });
   },
   // eslint-disable-next-line no-unused-vars
   getCitiesForAutoSearch(context, payload) {
@@ -57,8 +42,11 @@ const actions = {
 
 const mutations = {
   addToAutoSearchList(state, payload) {
-    state.searchedWeather = payload;
+    state.autoSearchList = payload;
     // update the index DB with new Data
+  },
+  setSearchAPIProgress(state, payload) {
+    state.searchAPIProgress = payload;
   }
 };
 

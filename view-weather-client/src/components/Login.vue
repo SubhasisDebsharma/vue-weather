@@ -1,7 +1,13 @@
 <template>
   <v-content class="login">
     <v-container fluid fill-height>
-      <v-layout wrap align-content-space-around justify-space-around row fill-height>
+      <v-layout
+        wrap
+        align-content-space-around
+        justify-space-around
+        row
+        fill-height
+      >
         <v-flex xs12 class="view-weather">
           <span class="view-weather--text">View Weather</span>
         </v-flex>
@@ -40,7 +46,15 @@
             </v-card-actions>
           </v-card>
         </v-flex>
-        <video playsinline autoplay muted loop id="myVideo">
+        <img src alt />
+        <video
+          playsinline
+          autoplay
+          muted
+          loop
+          id="myVideo"
+          :poster="videoPoster"
+        >
           <source :src="videoURL" type="video/mp4" />
         </video>
       </v-layout>
@@ -54,7 +68,8 @@ export default {
   data() {
     return {
       videoURL:
-        "https://firebasestorage.googleapis.com/v0/b/viewweather-a2bc9.appspot.com/o/rain.mp4?alt=media&token=773a9a34-e543-477f-be4e-147d97e1f0ba"
+        "https://firebasestorage.googleapis.com/v0/b/viewweather-a2bc9.appspot.com/o/rain.mp4?alt=media&token=773a9a34-e543-477f-be4e-147d97e1f0ba",
+      videoPoster: require("@/assets/images/rain1.jpg")
     };
   },
   methods: {

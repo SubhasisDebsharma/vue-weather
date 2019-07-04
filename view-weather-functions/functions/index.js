@@ -61,3 +61,70 @@ exports.searchCities = functions.https.onRequest((req, res) => {
       res.send(data);
     });
 });
+
+exports.dummySearchCities = functions.https.onRequest((req, res) => {
+  const result = {
+    "19099": {
+      coord: { lat: 68.880623, lon: 33.018421 },
+      country: "RU",
+      id: 546554,
+      name: "Kola"
+    },
+    "22532": {
+      coord: { lat: 55.328335, lon: 37.738888 },
+      country: "RU",
+      id: 6416531,
+      name: "Kolachëvo"
+    },
+    "39016": {
+      coord: { lat: -24.9, lon: 152.083328 },
+      country: "AU",
+      id: 2161177,
+      name: "Kolan"
+    },
+    "43763": {
+      coord: { lat: 13.13333, lon: 78.133331 },
+      country: "IN",
+      id: 1266305,
+      name: "Kolar"
+    },
+    "97486": {
+      coord: { lat: 49.80743, lon: 21.434071 },
+      country: "PL",
+      id: 768827,
+      name: "Kolaczyce"
+    },
+    "106036": {
+      coord: { lat: 15.2, lon: 76.866669 },
+      country: "IN",
+      id: 1266320,
+      name: "Kolagallu"
+    },
+    "112040": {
+      coord: { lat: 25.23333, lon: 77.599998 },
+      country: "IN",
+      id: 1266302,
+      name: "Kolaras"
+    },
+    "184843": {
+      coord: { lat: 5.07028, lon: 119.896942 },
+      country: "PH",
+      id: 1708553,
+      name: "Kolape"
+    },
+    "184844": {
+      coord: { lat: 8.1144, lon: 123.897102 },
+      country: "PH",
+      id: 1708557,
+      name: "Kolambugan"
+    },
+    "188209": {
+      coord: { lat: 52.217388, lon: 17.62413 },
+      country: "PL",
+      id: 3090207,
+      name: "Kolaczkowo"
+    }
+  };
+  res.set("Access-Control-Allow-Origin", "*");
+  res.send(result);
+});

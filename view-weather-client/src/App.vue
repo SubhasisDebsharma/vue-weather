@@ -7,6 +7,7 @@
     <v-app id="inspire">
       <vw-header></vw-header>
       <router-view></router-view>
+      <snackbar></snackbar>
     </v-app>
   </div>
 </template>
@@ -27,10 +28,12 @@
 
 <script>
 import Header from "@/components/header/Header.vue";
+import Snackbar from "@/components/shared/snackbar.vue";
 import { mapActions } from "vuex";
 export default {
   components: {
-    "vw-header": Header
+    "vw-header": Header,
+    Snackbar
   },
   methods: {
     ...mapActions(["silentLogin"])
