@@ -66,7 +66,7 @@ export default {
           }
           return false;
         },
-        1500
+        500
       );
     }
   },

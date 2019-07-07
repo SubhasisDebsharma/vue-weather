@@ -1,13 +1,7 @@
 <template>
   <v-content class="login">
     <v-container fluid fill-height>
-      <v-layout
-        wrap
-        align-content-space-around
-        justify-space-around
-        row
-        fill-height
-      >
+      <v-layout wrap align-content-space-around justify-space-around row fill-height>
         <v-flex xs12 class="view-weather">
           <span class="view-weather--text">View Weather</span>
         </v-flex>
@@ -47,14 +41,7 @@
           </v-card>
         </v-flex>
         <img src alt />
-        <video
-          playsinline
-          autoplay
-          muted
-          loop
-          id="myVideo"
-          :poster="videoPoster"
-        >
+        <video playsinline autoplay muted loop id="myVideo" :poster="videoPoster">
           <source :src="videoURL" type="video/mp4" />
         </video>
       </v-layout>
@@ -109,13 +96,17 @@ export default {
     font-weight: bold;
     text-transform: uppercase;
     font-size: 2.6rem;
-    color: white;
-    text-shadow: 0px 2px 10px black;
+    color: $white;
+    text-shadow: 0px 2px 10px $black;
     letter-spacing: 1.6rem;
     text-align: center;
     filter: opacity(1);
     animation: moveInBottomTilt 1s ease-out 0.5s;
     animation-fill-mode: backwards;
+    .view-weather--text {
+      position: relative;
+      z-index: 1;
+    }
   }
   .login-text {
     .login-text--ad {

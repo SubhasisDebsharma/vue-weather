@@ -35,10 +35,11 @@ export default {
     Snackbar
   },
   methods: {
-    ...mapActions(["silentLogin"])
+    ...mapActions(["silentLogin", "loadLocalWeather"])
   },
   mounted: function() {
     this.silentLogin();
+    this.loadLocalWeather();
   }
 };
 </script>

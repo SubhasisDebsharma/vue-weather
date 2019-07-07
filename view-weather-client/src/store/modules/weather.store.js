@@ -3,8 +3,8 @@
 
 const state = {
   searchedCity: null,
-  searchedWeatherForcust: null,
-  searchedWeatherForcustLoading: false,
+  searchedWeatherForecast: null,
+  searchedWeatherForecastLoading: false,
   searchedCurrentWeather: null,
   searchedCurrentWeatherLoading: false,
   localWeather: null,
@@ -13,8 +13,8 @@ const state = {
 
 const getters = {
   searchedCity: state => state.searchedCity,
-  searchedWeatherForcust: state => state.searchedWeatherForcust,
-  searchedWeatherForcustLoading: state => state.searchedWeatherForcustLoading,
+  searchedWeatherForecast: state => state.searchedWeatherForecast,
+  searchedWeatherForecastLoading: state => state.searchedWeatherForecastLoading,
   searchedCurrentWeather: state => state.searchedCurrentWeather,
   searchedCurrentWeatherLoading: state => state.searchedCurrentWeatherLoading,
   localWeather: state => state.localWeather,
@@ -24,17 +24,17 @@ const getters = {
 const actions = {
   getSearchWeather(context, payload) {
     context.commit("searchedCity", payload);
-    context.commit("searchedWeatherForcustLoading", true);
+    context.commit("searchedWeatherForecastLoading", true);
     import("../../assets/json/fiveDaysWeather.json").then(
       data => {
         console.log(data);
-        context.commit("searchedWeatherForcustLoading", false);
-        context.commit("searchedWeatherForcust", data);
+        context.commit("searchedWeatherForecastLoading", false);
+        context.commit("searchedWeatherForecast", data);
       },
       err => {
         console.log(err);
-        context.commit("searchedWeatherForcustLoading", false);
-        context.commit("searchedWeatherForcust", null);
+        context.commit("searchedWeatherForecastLoading", false);
+        context.commit("searchedWeatherForecast", null);
       }
     );
     context.commit("searchedCurrentWeatherLoading", true);
@@ -74,17 +74,17 @@ const mutations = {
   searchedCity(state, payload) {
     state.searchedCity = payload;
   },
-  searchedWeatherForcust(state, payload) {
-    state.searchedWeatherForcust = payload;
+  searchedWeatherForecast(state, payload) {
+    state.searchedWeatherForecast = payload;
   },
-  searchedWeatherForcustLoading(state, payload) {
-    state.searchedWeatherForcustLoading = payload;
+  searchedWeatherForecastLoading(state, payload) {
+    state.searchedWeatherForecastLoading = payload;
   },
   searchedCurrentWeather(state, payload) {
-    state.searchCurrentWeather = payload;
+    state.searchedCurrentWeather = payload;
   },
   searchedCurrentWeatherLoading(state, payload) {
-    state.searchCurrentWeatherLoading = payload;
+    state.searchedCurrentWeatherLoading = payload;
   },
   localWeather(state, payload) {
     state.localWeather = payload;
