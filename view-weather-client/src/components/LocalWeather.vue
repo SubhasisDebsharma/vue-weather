@@ -11,7 +11,7 @@
           ></v-progress-circular>
           <current-weather v-else :details="localWeather">
             <template v-slot:header>
-              <span class="fw-400">Local Weather:</span>
+              <span class="subheader">Local Weather:</span>
             </template>
           </current-weather>
         </v-flex>

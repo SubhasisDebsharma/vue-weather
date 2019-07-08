@@ -1,0 +1,98 @@
+[
+  {
+    "coord": { "lat": 13.13333, "lon": 78.133331 },
+    "country": "IN",
+    "id": 1266305,
+    "name": "Kolar"
+  },
+  {
+    "coord": { "lat": 49.80743, "lon": 21.434071 },
+    "country": "PL",
+    "id": 768827,
+    "name": "Kolaczyce"
+  },
+  {
+    "coord": { "lat": 15.2, "lon": 76.866669 },
+    "country": "IN",
+    "id": 1266320,
+    "name": "Kolagallu"
+  },
+  {
+    "coord": { "lat": 25.23333, "lon": 77.599998 },
+    "country": "IN",
+    "id": 1266302,
+    "name": "Kolaras"
+  },
+  {
+    "coord": { "lat": 13.13333, "lon": 78.133331 },
+    "country": "IN",
+    "id": 12663051,
+    "name": "Kolar"
+  },
+  {
+    "coord": { "lat": 49.80743, "lon": 21.434071 },
+    "country": "PL",
+    "id": 7688271,
+    "name": "Kolaczyce"
+  },
+  {
+    "coord": { "lat": 15.2, "lon": 76.866669 },
+    "country": "IN",
+    "id": 12663201,
+    "name": "Kolagallu"
+  },
+  {
+    "coord": { "lat": 25.23333, "lon": 77.599998 },
+    "country": "IN",
+    "id": 12663021,
+    "name": "Kolaras"
+  },
+  {
+    "coord": { "lat": 13.13333, "lon": 78.133331 },
+    "country": "IN",
+    "id": 12663052,
+    "name": "Kolar"
+  },
+  {
+    "coord": { "lat": 49.80743, "lon": 21.434071 },
+    "country": "PL",
+    "id": 7688232,
+    "name": "Kolaczyce"
+  },
+  {
+    "coord": { "lat": 15.2, "lon": 76.866669 },
+    "country": "IN",
+    "id": 12663202,
+    "name": "Kolagallu"
+  },
+  {
+    "coord": { "lat": 25.23333, "lon": 77.599998 },
+    "country": "IN",
+    "id": 12663022,
+    "name": "Kolaras"
+  },
+  {
+    "coord": { "lat": 13.13333, "lon": 78.133331 },
+    "country": "IN",
+    "id": 12663053,
+    "name": "Kolar"
+  },
+  {
+    "coord": { "lat": 49.80743, "lon": 21.434071 },
+    "country": "PL",
+    "id": 7688273,
+    "name": "Kolaczyce"
+  },
+  {
+    "coord": { "lat": 15.2, "lon": 76.866669 },
+    "country": "IN",
+    "id": 12663203,
+    "name": "Kolagallu"
+  },
+  {
+    "coord": { "lat": 25.23333, "lon": 77.599998 },
+    "country": "IN",
+    "id": 12663023,
+    "name": "Kolaras"
+  }
+]

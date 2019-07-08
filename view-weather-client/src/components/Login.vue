@@ -84,6 +84,16 @@ export default {
 @import "../styles/class";
 @import "../styles/variables";
 .login {
+  // background: linear-gradient(
+  //     to right top,
+  //     rgba($green, 0.5),
+  //     rgba($white, 0.7),
+  //     rgba($lightBlue, 0.7)
+  //   ),
+  //   url("../assets/images/rain1.jpg");
+  // background-size: cover;
+  // background-position: top;
+  // position: relative;
   .login--card {
     opacity: 0.8;
     animation: appear 1s ease-out 0.2s;
@@ -100,7 +110,8 @@ export default {
     text-shadow: 0px 2px 10px $black;
     letter-spacing: 1.6rem;
     text-align: center;
-    filter: opacity(1);
+    // filter: opacity(0.6);
+    opacity: 0.8;
     animation: moveInBottomTilt 1s ease-out 0.5s;
     animation-fill-mode: backwards;
     .view-weather--text {
@@ -117,7 +128,7 @@ export default {
   }
   #myVideo {
     pointer-events: none;
-    filter: opacity(0.4);
+    opacity: 0.4;
     position: fixed;
     top: 0;
     left: 0;
@@ -132,11 +143,10 @@ export default {
       transform: translateY(3rem);
     }
     75% {
-      opacity: 0.75;
       transform: translateY(-0.5rem);
     }
     100% {
-      opacity: 1;
+      opacity: 0.8;
       transform: translateY(0);
     }
   }

@@ -4,7 +4,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons"
       rel="stylesheet"
     />
-    <v-app id="inspire">
+    <v-app id="inspire" class="app">
       <vw-header></vw-header>
       <router-view></router-view>
       <snackbar></snackbar>
@@ -15,10 +15,6 @@
 <style lang="scss">
 @import "./styles/index";
 #app {
-  // font-family: "Avenir", Helvetica, Arial, sans-serif;
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
   font-size: 1.6rem;
   font-weight: 300;
   color: $color1;
@@ -28,18 +24,36 @@
 <script>
 import Header from "@/components/header/Header.vue";
 import Snackbar from "@/components/shared/snackbar.vue";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     "vw-header": Header,
     Snackbar
   },
+  computed: {
+    ...mapGetters(["savedCity", "isLoggedIn"])
+  },
   methods: {
-    ...mapActions(["silentLogin", "loadLocalWeather"])
+    ...mapActions([
+      "silentLogin",
+      "loadLocalWeather",
+      "loadSavedCity",
+      "getSearchWeather",
+      "loadMyCities"
+    ])
   },
   mounted: function() {
     this.silentLogin();
     this.loadLocalWeather();
+    this.loadSavedCity();
+    if (this.savedCity) {
+      this.getSearchWeather(this.savedCity);
+    }
+  },
+  watch: {
+    isLoggedIn: function() {
+      this.loadMyCities();
+    }
   }
 };
 </script>

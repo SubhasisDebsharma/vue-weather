@@ -19,6 +19,18 @@
               </span>
               <span class="country" title="Country">{{ searchedCity && searchedCity.country }}</span>
               <span>{{ searchedCity && searchedCity.name }}</span>
+              <v-btn
+                v-if="isLoggedIn"
+                title="Add to My List"
+                color="#8096ce"
+                icon
+                fab
+                small
+                outline
+                @click="addCity()"
+              >
+                <v-icon>add</v-icon>
+              </v-btn>
             </div>
           </div>
         </v-flex>
@@ -34,25 +46,24 @@
           ></v-progress-circular>
           <v-container v-else class="main-weather--details no-gutter" fill-height fluid>
             <v-layout wrap align-start row>
-              <v-flex class="main-weather--current-weather" sm6 xs12>
+              <v-flex sm6 xs12>
                 <v-progress-circular
                   v-if="searchedCurrentWeatherLoading"
                   indeterminate
                   color="primary"
                   class="vw-align-center"
                 ></v-progress-circular>
-                <current-weather :details="searchedCurrentWeather" v-else>
+                <current-weather
+                  :details="searchedCurrentWeather"
+                  v-else-if="searchedCurrentWeather"
+                  class="main-weather--current-weather"
+                >
                   <template v-slot:header>
-                    <span class="fw-400">Current Weather:</span>
+                    <span class="subheader">Current Weather:</span>
                   </template>
                 </current-weather>
-                <v-divider v-if="xsOnly"></v-divider>
               </v-flex>
-              <v-flex
-                :class="{'main-weather--selected-weather': true, 'border-left-vr': !xsOnly}"
-                sm6
-                xs12
-              >
+              <v-flex class="main-weather--selected-weather" sm6 xs12>
                 <v-progress-circular
                   v-if="searchedWeatherForecastLoading"
                   indeterminate
@@ -67,7 +78,7 @@
                         item-text="dt_txt"
                         prepend-icon="fa-clock"
                         menu-props="auto"
-                        label="Select Forecast Time"
+                        label="View Weather Forecast"
                         dense
                         return-object
                         v-model="selectedForecastItem"
@@ -85,8 +96,8 @@
 
         <v-flex shrink>
           <v-layout class="temp-curve" column wrap v-if="searchedWeatherForecast">
-            <v-flex shrink class="temp-curve--header fw-400">
-              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon>Temperature Curve
+            <v-flex shrink class="subheader temp-curve--header fw-400">
+              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon>Temperature Curve:
             </v-flex>
             <v-flex>
               <weather-sparkline
@@ -121,22 +132,23 @@
     background: $themeColor1;
     color: $white;
     .temp-curve--header {
-      font-size: 1.8rem;
       padding-left: 1rem;
       padding-top: 0.5rem;
+      color: $white;
       .temp-curve--header__icon {
-        color: white;
+        color: $white;
         margin-right: 1rem;
       }
     }
   }
-  .border-left-vr {
-    border-left: 1px solid gainsboro;
+  .main-weather--current-weather {
+    padding: 1rem;
+    background: #fafafa;
   }
 }
 </style>
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import AutoSearch from "./AutoSearch";
 import CurrentWeather from "./CurrentWeather";
 import WeatherSparkline from "./WeatherSparkline";
@@ -153,15 +165,13 @@ export default {
     };
   },
   computed: {
-    xsOnly: function() {
-      return this.$vuetify.breakpoint.xsOnly;
-    },
     ...mapGetters([
       "searchedCity",
       "searchedWeatherForecast",
       "searchedWeatherForecastLoading",
       "searchedCurrentWeather",
-      "searchedCurrentWeatherLoading"
+      "searchedCurrentWeatherLoading",
+      "isLoggedIn"
     ])
   },
   watch: {
@@ -174,8 +184,12 @@ export default {
       this.searchedWeatherForecast && this.searchedWeatherForecast.list[0];
   },
   methods: {
+    ...mapActions(["addCityToMyList"]),
     onSelectForecastItem: function(item) {
       this.selectedForecastItem = item;
+    },
+    addCity: function() {
+      this.addCityToMyList(this.searchedCity);
     }
   }
 };

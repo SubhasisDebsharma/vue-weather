@@ -5,7 +5,7 @@ import { cityListStore } from "./modules/cityList.store";
 import { loginStore } from "./modules/login.store";
 import { weatherStore } from "./modules/weather.store";
 import { snackbarStore } from "./modules/snackbar.store";
-
+import { storageStore } from "./modules/storage.store";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,6 +17,7 @@ export default new Vuex.Store({
     cityListStore,
     loginStore,
     weatherStore,
-    snackbarStore
+    snackbarStore,
+    storageStore
   }
 });

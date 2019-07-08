@@ -39,7 +39,9 @@
   padding: 0;
   margin: 0;
 }
-
+.no-margin {
+  margin: 0;
+}
 .text-small {
   font-size: 80%;
 }
@@ -57,4 +59,23 @@
 
 .text-transform-capitalize {
   text-transform: capitalize;
+}
+
+.subheader {
+  font-weight: 400;
+  color: dimgray;
+}
+
+.inline {
+  display: inline;
+}
+
+.bg-hover {
+  &:hover {
+    background: #eeeeee;
+  }
+}
+
+.scale-85 {
+  transform: scale(0.85);
 }

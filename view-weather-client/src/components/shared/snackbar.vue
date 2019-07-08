@@ -1,20 +1,17 @@
 <template>
-  <v-snackbar v-model="snackbar" :timeout="timeout" top :color="colorType">
+  <v-snackbar v-model="snackbar" :timeout="timeout" bottom :color="colorType">
     {{ text }}
     <v-btn color="pink" flat @click="snackbar = false">Close</v-btn>
   </v-snackbar>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import { SNACKBAR_TYPE } from "../../constants/snackbar.const";
 export default {
   data() {
     return {
       snackbar: false,
-      y: "top",
-      x: null,
-      mode: "",
       timeout: 6000,
       text: "",
       colorType: SNACKBAR_TYPE.INFO
@@ -22,6 +19,9 @@ export default {
   },
   computed: {
     ...mapGetters(["snackbarMessage", "snackbarType"])
+  },
+  methods: {
+    ...mapActions(["triggerSnackbar"])
   },
   watch: {
     snackbarMessage: function(nv) {
@@ -37,6 +37,11 @@ export default {
         this.colorType = nv;
       } else {
         this.colorType = SNACKBAR_TYPE.INFO;
+      }
+    },
+    snackbar: function(v) {
+      if (!v) {
+        this.triggerSnackbar();
       }
     }
   }

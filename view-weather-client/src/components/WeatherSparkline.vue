@@ -12,30 +12,30 @@
   >
     <template v-slot:label="item">
       <tspan
-        :class="{lt: true, disable: !canViewPrevious}"
+        :class="{ lt: true, disable: !canViewPrevious }"
         @click="onArrowClick(-1)"
         v-if="item.index === 0"
-      >&#xf060; &nbsp;</tspan>
+        >&#xf060; &nbsp;</tspan
+      >
 
       <template v-if="list[item.index] === selectedItem">
-        <tspan
-          @click="onSelect(list[item.index])"
-          class="selectedItem"
-        >{{list[item.index].main.temp}}</tspan>
+        <tspan @click="onSelect(list[item.index])" class="selectedItem">{{
+          list[item.index].main.temp
+        }}</tspan>
       </template>
 
       <template v-else>
-        <tspan
-          @click="onSelect(list[item.index])"
-          class="not-selectedItem"
-        >{{list[item.index].main.temp}}</tspan>
+        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">{{
+          list[item.index].main.temp
+        }}</tspan>
       </template>
 
       <tspan
-        :class="{gt: true, disable: !canViewNext}"
+        :class="{ gt: true, disable: !canViewNext }"
         @click="onArrowClick(+1)"
         v-if="item.index === 4"
-      >&nbsp; &#xf061;</tspan>
+        >&nbsp; &#xf061;</tspan
+      >
     </template>
   </v-sparkline>
 </template>
@@ -79,16 +79,16 @@ export default {
   data() {
     return {
       list: [],
-      _selectedItem: null
+      localSelectedItem: null
     };
   },
   computed: {
     selectedItem: {
       get: function() {
-        return this.selected || this._selectedItem;
+        return this.selected || this.localSelectedItem;
       },
       set: function(v) {
-        this._selectedItem = v;
+        this.localSelectedItem = v;
       }
     },
     canViewPrevious: function() {
@@ -105,7 +105,7 @@ export default {
     }
   },
   watch: {
-    selectedItem: function(newValue) {
+    selectedItem: function() {
       this.setList();
     }
   },

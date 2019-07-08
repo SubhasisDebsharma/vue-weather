@@ -11,17 +11,19 @@
               <v-flex>
                 <img :src="iconUrl" :alt="iconAlt" />
               </v-flex>
-              <v-flex class="fs-xxl">{{temp}}&deg; F</v-flex>
-              <v-flex class="fs-xl text-transform-capitalize">{{description}}</v-flex>
+              <v-flex class="fs-xxl">{{ temp }}&deg; F</v-flex>
+              <v-flex class="fs-xl text-transform-capitalize">{{
+                description
+              }}</v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs6>
             <v-layout column class="text-small">
-              <v-flex>Min Temp: {{tempMin}} &deg; F</v-flex>
-              <v-flex>Max Temp: {{tempMax}} &deg; F</v-flex>
-              <v-flex>Pressure: {{pressure}}</v-flex>
-              <v-flex>Humidity: {{humidity}}</v-flex>
-              <v-flex>Wind Speed: {{windSpeed}} km/h</v-flex>
+              <v-flex>Min Temp: {{ tempMin }} &deg; F</v-flex>
+              <v-flex>Max Temp: {{ tempMax }} &deg; F</v-flex>
+              <v-flex>Pressure: {{ pressure }}</v-flex>
+              <v-flex>Humidity: {{ humidity }}</v-flex>
+              <v-flex>Wind Speed: {{ windSpeed }} km/h</v-flex>
             </v-layout>
           </v-flex>
         </v-layout>
@@ -34,7 +36,6 @@
 @import "../styles/class";
 @import "../styles/variables";
 </style>
-
 
 <script>
 export default {

@@ -27,7 +27,6 @@ const actions = {
     context.commit("searchedWeatherForecastLoading", true);
     import("../../assets/json/fiveDaysWeather.json").then(
       data => {
-        console.log(data);
         context.commit("searchedWeatherForecastLoading", false);
         context.commit("searchedWeatherForecast", data);
       },
@@ -40,9 +39,9 @@ const actions = {
     context.commit("searchedCurrentWeatherLoading", true);
     import("../../assets/json/currentWeather.json").then(
       data => {
-        console.log(data);
         context.commit("searchedCurrentWeatherLoading", false);
         context.commit("searchedCurrentWeather", data);
+        context.dispatch("saveCity", payload);
       },
       err => {
         console.log(err);
@@ -57,7 +56,6 @@ const actions = {
     context.commit("localWeatherLoading", true);
     import("../../assets/json/currentWeather.json").then(
       data => {
-        console.log(data);
         context.commit("localWeatherLoading", false);
         context.commit("localWeather", data);
       },
