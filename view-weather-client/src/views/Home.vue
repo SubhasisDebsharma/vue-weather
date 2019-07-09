@@ -134,7 +134,7 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateX(90vw) scale(0.8);
+      transform: translateX(90vw) scale(1);
       opacity: 0;
     }
   }
@@ -144,7 +144,7 @@
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-110%) scale(1);
+      transform: translateX(-110%);
     }
     80% {
       z-index: 1000;
@@ -156,7 +156,7 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateX(90vw) scale(0.8);
+      transform: translateX(90vw);
       opacity: 0;
     }
   }
@@ -166,7 +166,7 @@
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-120%) scale(1);
+      transform: translateX(-120%);
     }
     80% {
       z-index: 1000;
@@ -178,7 +178,7 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateX(90vw) scale(0.8);
+      transform: translateX(90vw);
       opacity: 0;
     }
   }
