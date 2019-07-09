@@ -48,22 +48,16 @@
   }
   .cloud-img1 {
     @extend .cloud-img;
-    // top: 0;
-    // z-index: 2;
     animation: moveLeftDownIn1 3s ease-in;
     animation-fill-mode: backwards;
   }
   .cloud-img2 {
     @extend .cloud-img;
-    // top: 0vh;
-    // z-index: 2;
     animation: moveLeftDownIn2 3s ease-in 1s;
     animation-fill-mode: backwards;
   }
   .cloud-img3 {
     @extend .cloud-img;
-    // top: 0;
-    // z-index: 2;
     animation: moveLeftDownIn3 3s ease-in;
     animation-fill-mode: backwards;
   }
@@ -128,7 +122,7 @@
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-150%) scale(1);
+      transform: translateX(-110%) scale(1);
     }
     80% {
       z-index: 1000;
@@ -150,7 +144,7 @@
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-150%) scale(1);
+      transform: translateX(-110%) scale(1);
     }
     80% {
       z-index: 1000;
@@ -172,7 +166,7 @@
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-150%) scale(1);
+      transform: translateX(-120%) scale(1);
     }
     80% {
       z-index: 1000;
