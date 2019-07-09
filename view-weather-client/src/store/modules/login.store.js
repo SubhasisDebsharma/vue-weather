@@ -2,12 +2,14 @@ import * as firebase from "firebase";
 
 const state = {
   user: null,
-  isLoggedIn: false
+  isLoggedIn: false,
+  userAuthToken: ""
 };
 
 const getters = {
   user: state => state.user,
-  isLoggedIn: state => state.isLoggedIn
+  isLoggedIn: state => state.isLoggedIn,
+  userAuthToken: state => state.userAuthToken
 };
 
 const actions = {
@@ -19,13 +21,18 @@ const actions = {
       provider = new firebase.auth.GoogleAuthProvider();
     }
 
+    let userData = null;
     provider.addScope("");
     firebase
       .auth()
       .signInWithPopup(provider)
       .then(result => {
-        const userData = getUserDetailFromFirebseUser(result.user);
+        userData = getUserDetailFromFirebseUser(result.user);
+        return firebase.auth().currentUser.getIdToken();
+      })
+      .then(userAuthToken => {
         context.commit("login", userData);
+        context.commit("userAuthToken", userAuthToken);
       })
       .catch(err => {
         console.log("Error: ", err);
@@ -35,7 +42,13 @@ const actions = {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         const userData = getUserDetailFromFirebseUser(user);
-        context.commit("login", userData);
+        firebase
+          .auth()
+          .currentUser.getIdToken()
+          .then(userAuthToken => {
+            context.commit("login", userData);
+            context.commit("userAuthToken", userAuthToken);
+          });
       }
     });
   },
@@ -57,9 +70,13 @@ const mutations = {
     state.list = payload;
     state.isLoggedIn = true;
   },
+  userAuthToken(satate, payload) {
+    state.userAuthToken = payload;
+  },
   logout(state, payload) {
     state.user = payload;
     state.isLoggedIn = false;
+    state.userIdToken = "";
   }
 };
 

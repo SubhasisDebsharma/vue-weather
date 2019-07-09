@@ -1,7 +1,12 @@
 <template>
   <v-card class="width-100pc height-100pc city-list">
     <v-container class="height-100pc">
-      <v-layout wrap column v-if="isLoggedIn && cities && cities.length" class="height-100pc">
+      <v-layout
+        wrap
+        column
+        v-if="isLoggedIn && cities && cities.length && !myCityListLoadnig"
+        class="height-100pc"
+      >
         <v-flex class="city-list--header subheader">My List:</v-flex>
         <v-flex class="city-list--search">
           <v-text-field
@@ -13,52 +18,38 @@
         </v-flex>
         <v-flex class="height-100pc city-list--items">
           <v-list dense light>
+            <city-list-item
+              v-if="addingCityToList"
+              class="city-list-item loading"
+              :item="addingCityToList"
+              :search="search"
+              :searchedCity="searchedCity"
+            ></city-list-item>
             <template v-for="(item, index) in filteredCities">
-              <v-list-tile class="bg-hover city-list--item" :key="index + 'C'">
-                <v-list-tile-avatar class="city-list--delete-avatar">
-                  <v-btn
-                    class="no-gutter scale-85"
-                    title="Remove from list"
-                    ripple
-                    flat
-                    icon
-                    color="#808080"
-                    @click="removeCity($event, item)"
-                  >
-                    <v-icon>fa-lg fa-trash</v-icon>
-                  </v-btn>
-                </v-list-tile-avatar>
-
-                <span
-                  class="country no-margin city-list--item__conuntry"
-                  title="Country"
-                  v-html="item.country"
-                ></span>
-
-                <v-list-tile-content>
-                  <highlight-text :text="item.name" :highLight="search"></highlight-text>
-                </v-list-tile-content>
-
-                <v-list-tile-action>
-                  <v-btn
-                    @click="viewCity($event, item)"
-                    icon
-                    ripple
-                    flat
-                    title="View Weather"
-                    :color="item === searchedCity ? 'primary' : '#808080'"
-                  >
-                    <v-icon>fa-cloud-sun</v-icon>
-                  </v-btn>
-                </v-list-tile-action>
-              </v-list-tile>
-              <!-- <v-divider inset :key="index + 'D'"></v-divider> -->
+              <city-list-item
+                class="city-list-item"
+                @removeCity="removeCity($event, item)"
+                @viewCity="viewCity($event, item)"
+                :key="index"
+                :item="item"
+                :search="search"
+                :searchedCity="searchedCity"
+              ></city-list-item>
             </template>
           </v-list>
         </v-flex>
       </v-layout>
       <v-layout v-else-if="!isLoggedIn" column wrap>
-        <v-flex class="subheader">Please login to create your list of cities...</v-flex>
+        <v-flex class="subheader"
+          >Please login to create your list of cities...</v-flex
+        >
+      </v-layout>
+      <v-layout v-else-if="myCityListLoadnig">
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          class="vw-align-center"
+        ></v-progress-circular>
       </v-layout>
       <v-layout v-else column wrap>
         <v-flex class="subheader">Add cities to your list</v-flex>
@@ -80,15 +71,6 @@
     height: calc(100% - 7.7rem);
     overflow-y: auto;
     overflow-x: hidden;
-    .city-list--item {
-      padding-left: 0;
-      .city-list--item__conuntry {
-        margin-right: 1rem;
-      }
-      .city-list--delete-avatar {
-        min-width: auto;
-      }
-    }
   }
   .spinX {
     animation: spinX 2s ease;
@@ -96,6 +78,7 @@
   .remove {
     animation: remove 1s ease-in;
   }
+
   @keyframes remove {
     0% {
       box-shadow: 0 0.5rem 1rem gray;
@@ -116,10 +99,10 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import HighlightText from "./HighlightText";
+import CityListItem from "./CityListItem";
 export default {
   components: {
-    HighlightText
+    CityListItem
   },
   data() {
     return {
@@ -127,7 +110,13 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isLoggedIn", "searchedCity", "myCityList"]),
+    ...mapGetters([
+      "isLoggedIn",
+      "searchedCity",
+      "myCityList",
+      "myCityListLoadnig",
+      "addingCityToList"
+    ]),
     cities: function() {
       return [...this.myCityList];
     },
@@ -144,16 +133,16 @@ export default {
       this.doSpin(event);
       this.getSearchWeather(item);
     },
-    removeCity(event, item, index) {
-      this.doRemove(event).then(d => {
+    removeCity(event, item) {
+      this.doRemove(event).then(() => {
         const i = this.cities.findIndex(el => el.id === item.id);
         this.cities.splice(i, 1);
         this.removeCityFromList(item);
       });
     },
     doRemove(event) {
-      return new Promise((resolve, reject) => {
-        const ele = event.target.closest(".city-list--item");
+      return new Promise(resolve => {
+        const ele = event.target.closest(".city-list-item");
         ele.classList.add("remove");
         setTimeout(() => {
           ele.classList.remove("remove");
@@ -162,7 +151,7 @@ export default {
       });
     },
     doSpin(event) {
-      const ele = event.target.closest(".city-list--item");
+      const ele = event.target.closest(".city-list-item");
       ele.classList.add("spinX");
       setTimeout(() => {
         ele.classList.remove("spinX");

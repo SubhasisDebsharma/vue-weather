@@ -17,9 +17,9 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <img class="cloud-img1" :src="require('../assets/images/cloud3.png')" />
-    <img class="cloud-img2" :src="require('../assets/images/cloud2.png')" />
-    <img class="cloud-img3" :src="require('../assets/images/cloud4.png')" />
+    <img class="cloud-img1" :src="require('../assets/images/cloud3_sm.png')" />
+    <img class="cloud-img2" :src="require('../assets/images/cloud2_sm.png')" />
+    <img class="cloud-img3" :src="require('../assets/images/cloud4_sm.png')" />
     <div class="sky-img"></div>
   </v-content>
 </template>
@@ -53,12 +53,12 @@
   }
   .cloud-img2 {
     @extend .cloud-img;
-    animation: moveLeftDownIn2 3s ease-in 1s;
+    animation: moveLeftDownIn2 2.9s ease-in 1s;
     animation-fill-mode: backwards;
   }
   .cloud-img3 {
     @extend .cloud-img;
-    animation: moveLeftDownIn3 3s ease-in;
+    animation: moveLeftDownIn3 2.8s ease-in;
     animation-fill-mode: backwards;
   }
 
@@ -73,6 +73,7 @@
     background: linear-gradient(
       to top,
       rgba($darkblue, 0.7),
+      rgba($gray, 0.7),
       rgba($lightBlue, 0.7)
     );
   }
@@ -140,20 +141,20 @@
   }
   @keyframes moveLeftDownIn2 {
     0% {
-      z-index: 1000;
+      z-index: 1500;
       width: auto;
       height: auto;
       opacity: 1;
       transform: translateX(-110%);
     }
     80% {
-      z-index: 1000;
+      z-index: 1500;
       width: auto;
       height: auto;
       opacity: 1;
     }
     100% {
-      z-index: 1000;
+      z-index: 1500;
       width: auto;
       height: auto;
       transform: translateX(90vw);
@@ -162,20 +163,20 @@
   }
   @keyframes moveLeftDownIn3 {
     0% {
-      z-index: 1000;
+      z-index: 2000;
       width: auto;
       height: auto;
       opacity: 1;
-      transform: translateX(-120%);
+      transform: translateX(-130%);
     }
     80% {
-      z-index: 1000;
+      z-index: 2000;
       width: auto;
       height: auto;
       opacity: 1;
     }
     100% {
-      z-index: 1000;
+      z-index: 2000;
       width: auto;
       height: auto;
       transform: translateX(90vw);

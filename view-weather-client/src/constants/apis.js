@@ -5,5 +5,11 @@ module.exports = {
   sampleLocalWeather:
     "https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b6907d289e10d714a6e88b30761fae22",
   cityAutoComplete:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/dummySearchCities"
+    "http://localhost:5001/viewweather-a2bc9/us-central1/dummySearchCities",
+  addCityToMyList:
+    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/addCityToMyList",
+  getMyCityList:
+    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/getMyCityList",
+  removeCityFromList:
+    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/removeCityFromList"
 };

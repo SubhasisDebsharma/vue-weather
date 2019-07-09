@@ -10,6 +10,7 @@
     item-text="name"
     label="Search city and View Weather"
     placeholder="Start typing to Search"
+    prepend-icon="fa-search"
     return-object
     auto-select-first
     dense
@@ -23,7 +24,10 @@
     <template v-slot:item="data">
       <span>
         <span class="country" title="Country">{{ data.item.country }}</span>
-        <highlight-text :text="data.item.name" :highLight="search"></highlight-text>
+        <highlight-text
+          :text="data.item.name"
+          :highLight="search"
+        ></highlight-text>
       </span>
     </template>
   </v-autocomplete>

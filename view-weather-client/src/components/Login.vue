@@ -1,7 +1,13 @@
 <template>
   <v-content class="login">
     <v-container fluid fill-height>
-      <v-layout wrap align-content-space-around justify-space-around row fill-height>
+      <v-layout
+        wrap
+        align-content-space-around
+        justify-space-around
+        row
+        fill-height
+      >
         <v-flex xs12 class="view-weather">
           <span class="view-weather--text">View Weather</span>
         </v-flex>
@@ -41,7 +47,14 @@
           </v-card>
         </v-flex>
         <img src alt />
-        <video playsinline autoplay muted loop id="myVideo" :poster="videoPoster">
+        <video
+          playsinline
+          autoplay
+          muted
+          loop
+          id="myVideo"
+          :poster="videoPoster"
+        >
           <source :src="videoURL" type="video/mp4" />
         </video>
       </v-layout>
