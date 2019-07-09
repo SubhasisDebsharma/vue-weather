@@ -15,27 +15,29 @@
         :class="{ lt: true, disable: !canViewPrevious }"
         @click="onArrowClick(-1)"
         v-if="item.index === 0"
-        >&#xf060; &nbsp;</tspan
-      >
+      >&#xf060; &nbsp;</tspan>
 
       <template v-if="list[item.index] === selectedItem">
-        <tspan @click="onSelect(list[item.index])" class="selectedItem">{{
+        <tspan @click="onSelect(list[item.index])" class="selectedItem">
+          {{
           list[item.index].main.temp
-        }}</tspan>
+          }}&deg; F
+        </tspan>
       </template>
 
       <template v-else>
-        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">{{
+        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">
+          {{
           list[item.index].main.temp
-        }}</tspan>
+          }}&deg; F
+        </tspan>
       </template>
 
       <tspan
         :class="{ gt: true, disable: !canViewNext }"
         @click="onArrowClick(+1)"
         v-if="item.index === 4"
-        >&nbsp; &#xf061;</tspan
-      >
+      >&nbsp; &#xf061;</tspan>
     </template>
   </v-sparkline>
 </template>

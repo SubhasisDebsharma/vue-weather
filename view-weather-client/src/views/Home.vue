@@ -17,9 +17,10 @@
         </v-flex>
       </v-layout>
     </v-container>
-    <img class="cloud-img1" :src="require('../assets/images/cloud1.png')" />
-    <img class="cloud-img2" :src="require('../assets/images/cloud1.png')" />
-    <img class="cloud-img3" :src="require('../assets/images/cloud1.png')" />
+    <img class="cloud-img1" :src="require('../assets/images/cloud3.png')" />
+    <img class="cloud-img2" :src="require('../assets/images/cloud2.png')" />
+    <img class="cloud-img3" :src="require('../assets/images/cloud4.png')" />
+    <div class="sky-img"></div>
   </v-content>
 </template>
 
@@ -27,14 +28,14 @@
 @import "../styles/class";
 .vw-home {
   .vw-home--view-weather {
-    animation: hightOut 700ms ease;
+    animation: heightOut 700ms ease;
   }
   .vw-home--local-weather {
-    animation: hightOut 700ms ease;
+    animation: heightOut 700ms ease;
   }
   .vw-home--city-list {
     max-height: 33rem;
-    animation: hightOut 700ms ease;
+    animation: heightOut 700ms ease;
   }
   .cloud-img {
     width: 0;
@@ -47,21 +48,68 @@
   }
   .cloud-img1 {
     @extend .cloud-img;
+    // top: 0;
+    // z-index: 2;
     animation: moveLeftDownIn1 3s ease-in;
     animation-fill-mode: backwards;
   }
   .cloud-img2 {
     @extend .cloud-img;
-    animation: moveLeftDownIn2 2.5s ease-in;
+    // top: 0vh;
+    // z-index: 2;
+    animation: moveLeftDownIn2 3s ease-in 1s;
     animation-fill-mode: backwards;
   }
   .cloud-img3 {
     @extend .cloud-img;
+    // top: 0;
+    // z-index: 2;
     animation: moveLeftDownIn3 3s ease-in;
     animation-fill-mode: backwards;
   }
 
-  @keyframes hightOut {
+  .sky-img {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    display: block;
+    animation: displayHide 4s ease;
+    background: linear-gradient(
+      to top,
+      rgba($darkblue, 0.7),
+      rgba($lightBlue, 0.7)
+    );
+  }
+
+  @keyframes displayHide {
+    0% {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      z-index: 1;
+    }
+    50% {
+      width: 100%;
+      height: 100%;
+      opacity: 0.2;
+      z-index: 1;
+    }
+    75% {
+      width: 100%;
+      height: 100%;
+      opacity: 0.3;
+      z-index: 1;
+    }
+    100% {
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+    }
+  }
+
+  @keyframes heightOut {
     0% {
       opacity: 0;
       transform: scaleY(0);
@@ -79,14 +127,20 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      opacity: 0.8;
-      transform: translateY(50px) translateX(-150%) scale(1.01);
+      opacity: 1;
+      transform: translateX(-150%) scale(1);
+    }
+    80% {
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      opacity: 1;
     }
     100% {
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateY(0px) translateX(80vw) scale(0.8);
+      transform: translateX(90vw) scale(0.8);
       opacity: 0;
     }
   }
@@ -95,14 +149,20 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      opacity: 0.8;
-      transform: translateY(200px) translateX(-150%) scale(1.5);
+      opacity: 1;
+      transform: translateX(-150%) scale(1);
+    }
+    80% {
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      opacity: 1;
     }
     100% {
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateY(125px) translateX(80vw) scale(1);
+      transform: translateX(90vw) scale(0.8);
       opacity: 0;
     }
   }
@@ -111,14 +171,20 @@
       z-index: 1000;
       width: auto;
       height: auto;
-      opacity: 0.8;
-      transform: translateY(400px) translateX(-150%) scale(2);
+      opacity: 1;
+      transform: translateX(-150%) scale(1);
+    }
+    80% {
+      z-index: 1000;
+      width: auto;
+      height: auto;
+      opacity: 1;
     }
     100% {
       z-index: 1000;
       width: auto;
       height: auto;
-      transform: translateY(300px) translateX(80vw) scale(1.5);
+      transform: translateX(90vw) scale(0.8);
       opacity: 0;
     }
   }
