@@ -11,16 +11,18 @@
               <v-flex>
                 <img :src="iconUrl" :alt="iconAlt" />
               </v-flex>
-              <v-flex class="fs-xxl">{{ temp }}&deg; F</v-flex>
-              <v-flex class="fs-xl text-transform-capitalize">{{
+              <v-flex class="fs-xxl">{{ temp }}&deg; C</v-flex>
+              <v-flex class="fs-xl text-transform-capitalize">
+                {{
                 description
-              }}</v-flex>
+                }}
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs6>
             <v-layout column class="text-small">
-              <v-flex>Min Temp: {{ tempMin }} &deg; F</v-flex>
-              <v-flex>Max Temp: {{ tempMax }} &deg; F</v-flex>
+              <v-flex>Min Temp: {{ tempMin }} &deg; C</v-flex>
+              <v-flex>Max Temp: {{ tempMax }} &deg; C</v-flex>
               <v-flex>Pressure: {{ pressure }}</v-flex>
               <v-flex>Humidity: {{ humidity }}</v-flex>
               <v-flex>Wind Speed: {{ windSpeed }} km/h</v-flex>
@@ -45,35 +47,44 @@ export default {
     };
   },
   computed: {
+    weather: function() {
+      return this.details && this.details.weather && this.details.weather[0];
+    },
+    main: function() {
+      return this.details && this.details.main;
+    },
+    wind: function() {
+      return this.details && this.details.wind;
+    },
     iconAlt: function() {
-      return this.details && this.details.weather[0].Clear;
+      return this.weather && this.weather.Clear;
     },
     iconUrl: function() {
       return `http://openweathermap.org/img/wn/${this.icon}@2x.png`;
     },
     icon: function() {
-      return this.details && this.details.weather[0].icon;
+      return this.weather && this.weather.icon;
     },
     temp: function() {
-      return this.details && this.details.main.temp;
+      return this.main && this.main.temp;
     },
     description: function() {
-      return this.details && this.details.weather[0].description;
+      return this.weather && this.weather.description;
     },
     pressure: function() {
-      return this.details && this.details.main.pressure;
+      return this.main && this.main.pressure;
     },
     humidity: function() {
-      return this.details && this.details.main.humidity;
+      return this.main && this.main.humidity;
     },
     tempMin: function() {
-      return this.details && this.details.main.temp_min;
+      return this.main && this.main.temp_min;
     },
     tempMax: function() {
-      return this.details && this.details.main.temp_max;
+      return this.main && this.main.temp_max;
     },
     windSpeed: function() {
-      return this.details && this.details.wind.speed;
+      return this.wind && this.wind.speed;
     }
   },
   props: ["details"]

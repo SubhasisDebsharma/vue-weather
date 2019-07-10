@@ -15,27 +15,27 @@
         :class="{ lt: true, disable: !canViewPrevious }"
         @click="onArrowClick(-1)"
         v-if="item.index === 0"
-        >&#xf060; &nbsp;</tspan
-      >
+      >&#xf060; &nbsp;</tspan>
 
       <template v-if="list[item.index] === selectedItem">
-        <tspan @click="onSelect(list[item.index])" class="selectedItem">
-          {{ list[item.index].main.temp }}&deg; F
-        </tspan>
+        <tspan
+          @click="onSelect(list[item.index])"
+          class="selectedItem"
+        >{{ list[item.index].main && list[item.index].main.temp }}&deg; C</tspan>
       </template>
 
       <template v-else>
-        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">
-          {{ list[item.index].main.temp }}&deg; F
-        </tspan>
+        <tspan
+          @click="onSelect(list[item.index])"
+          class="not-selectedItem"
+        >{{ list[item.index].main && list[item.index].main.temp }}&deg; C</tspan>
       </template>
 
       <tspan
         :class="{ gt: true, disable: !canViewNext }"
         @click="onArrowClick(+1)"
         v-if="item.index === 4"
-        >&nbsp; &#xf061;</tspan
-      >
+      >&nbsp; &#xf061;</tspan>
     </template>
   </v-sparkline>
 </template>
@@ -101,7 +101,7 @@ export default {
       );
     },
     tempList: function() {
-      return this.list.map(l => l.main.temp);
+      return this.list.map(l => l.main && l.main.temp);
     }
   },
   watch: {
@@ -115,7 +115,7 @@ export default {
       this.$emit("input", item);
     },
     onArrowClick: function(offset) {
-      const firstObject = this.list[0];
+      const firstObject = this.list && this.list[0];
       const firstIndex = this.details.indexOf(firstObject);
       let startIndex = firstIndex;
       startIndex = startIndex + offset < 0 ? 0 : startIndex + offset;
@@ -145,7 +145,7 @@ export default {
   },
   mounted: function() {
     if (this.details) {
-      this.selectedItem = this.details[0];
+      this.selectedItem = this.details && this.details[0];
       this.setList();
     }
   }

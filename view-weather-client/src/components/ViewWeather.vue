@@ -3,10 +3,7 @@
     <v-container fluid fill-height>
       <v-layout column>
         <v-flex shrink class="search-city--header">
-          <auto-search
-            row
-            class="search-city--auto-search width-100pc"
-          ></auto-search>
+          <auto-search row class="search-city--auto-search width-100pc"></auto-search>
           <div class="search-city--subheader width-100pc">
             <div v-if="searchedCity">
               <v-icon>fa-city</v-icon>
@@ -16,14 +13,11 @@
                     searchedWeatherForecastLoading &&
                       searchedCurrentWeatherLoading
                   "
-                  >Searching</span
-                >
+                >Searching</span>
                 <span v-else>Showing</span>
                 result for:
               </span>
-              <span class="country" title="Country">
-                {{ searchedCity && searchedCity.country }}
-              </span>
+              <span class="country" title="Country">{{ searchedCity && searchedCity.country }}</span>
               <span>{{ searchedCity && searchedCity.name }}</span>
               <v-btn
                 v-if="isLoggedIn"
@@ -51,12 +45,7 @@
             color="primary"
             class="vw-align-center"
           ></v-progress-circular>
-          <v-container
-            v-else
-            class="main-weather--details no-gutter"
-            fill-height
-            fluid
-          >
+          <v-container v-else class="main-weather--details no-gutter" fill-height fluid>
             <v-layout wrap align-start row>
               <v-flex sm6 xs12>
                 <v-progress-circular
@@ -97,9 +86,7 @@
                       ></v-select>
                     </v-flex>
                     <v-flex xs12>
-                      <current-weather
-                        :details="selectedForecastItem"
-                      ></current-weather>
+                      <current-weather :details="selectedForecastItem"></current-weather>
                     </v-flex>
                   </v-layout>
                 </template>
@@ -109,15 +96,9 @@
         </v-flex>
 
         <v-flex shrink>
-          <v-layout
-            class="temp-curve"
-            column
-            wrap
-            v-if="searchedWeatherForecast"
-          >
+          <v-layout class="temp-curve" column wrap v-if="searchedWeatherForecast">
             <v-flex shrink class="subheader temp-curve--header fw-400">
-              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon
-              >Temperature Curve:
+              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon>Temperature Curve:
             </v-flex>
             <v-flex>
               <weather-sparkline
@@ -198,12 +179,14 @@ export default {
   },
   watch: {
     searchedWeatherForecast: function(nv) {
-      this.selectedForecastItem = nv && nv.list[0];
+      this.selectedForecastItem = nv && nv.list && nv.list[0];
     }
   },
   mounted: function() {
     this.selectedForecastItem =
-      this.searchedWeatherForecast && this.searchedWeatherForecast.list[0];
+      this.searchedWeatherForecast &&
+      this.searchedWeatherForecast.list &&
+      this.searchedWeatherForecast.list[0];
   },
   methods: {
     ...mapActions(["addCityToMyList"]),

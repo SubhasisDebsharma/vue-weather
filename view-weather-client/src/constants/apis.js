@@ -11,5 +11,7 @@ module.exports = {
   getMyCityList:
     "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/getMyCityList",
   removeCityFromList:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/removeCityFromList"
+    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/removeCityFromList",
+  currentWeather: "https://api.openweathermap.org/data/2.5/weather",
+  fiveDaysForecast: "https://api.openweathermap.org/data/2.5/forecast"
 };

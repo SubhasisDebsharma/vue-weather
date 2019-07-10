@@ -1,6 +1,7 @@
-// import axios from "axios";
-// import apis from "../../constants/apis";
-
+import axios from "axios";
+import apis from "../../constants/apis";
+import config from "../../config";
+import { SNACKBAR_TYPE } from "../../constants/snackbar.const";
 const state = {
   searchedCity: null,
   searchedWeatherForecast: null,
@@ -25,46 +26,86 @@ const actions = {
   getSearchWeather(context, payload) {
     context.commit("searchedCity", payload);
     context.commit("searchedWeatherForecastLoading", true);
-    import("../../assets/json/fiveDaysWeather.json").then(
-      data => {
-        context.commit("searchedWeatherForecastLoading", false);
-        context.commit("searchedWeatherForecast", data);
-      },
-      err => {
-        console.log(err);
-        context.commit("searchedWeatherForecastLoading", false);
-        context.commit("searchedWeatherForecast", null);
-      }
-    );
+    // import("../../assets/json/fiveDaysWeather.json")
+    axios
+      .get(apis.fiveDaysForecast, {
+        params: {
+          id: payload.id,
+          appid: config.WEATHER_API_KEY,
+          units: "metric"
+        }
+      })
+      .then(
+        response => {
+          context.commit("searchedWeatherForecastLoading", false);
+          context.commit("searchedWeatherForecast", response.data);
+        },
+        err => {
+          context.dispatch("triggerSnackbar", {
+            snackbarMessage: "Faild to load weather forecast: " + err.message,
+            snackbarType: SNACKBAR_TYPE.ERROR
+          });
+          context.commit("searchedWeatherForecastLoading", false);
+          context.commit("searchedWeatherForecast", null);
+        }
+      );
     context.commit("searchedCurrentWeatherLoading", true);
-    import("../../assets/json/currentWeather.json").then(
-      data => {
+    // import("../../assets/json/currentWeather.json");
+    axios
+      .get(apis.currentWeather, {
+        params: {
+          id: payload.id,
+          appid: config.WEATHER_API_KEY,
+          units: "metric"
+        }
+      })
+      .then(response => {
         context.commit("searchedCurrentWeatherLoading", false);
-        context.commit("searchedCurrentWeather", data);
+        context.commit("searchedCurrentWeather", response.data);
         context.dispatch("saveCity", payload);
-      },
-      err => {
-        console.log(err);
+      })
+      .catch(err => {
+        context.dispatch("triggerSnackbar", {
+          snackbarMessage: "Faild to load current weather: " + err.message,
+          snackbarType: SNACKBAR_TYPE.ERROR
+        });
         context.commit("searchedCurrentWeatherLoading", false);
         context.commit("searchedCurrentWeather", null);
-      }
-    );
+      });
   },
   // eslint-disable-next-line no-unused-vars
   loadLocalWeather(context, payload) {
     // Api call to get all loaded cities
-    context.commit("localWeatherLoading", true);
-    import("../../assets/json/currentWeather.json").then(
-      data => {
-        context.commit("localWeatherLoading", false);
-        context.commit("localWeather", data);
-      },
-      err => {
-        console.log(err);
-        context.commit("localWeatherLoading", false);
-        context.commit("localWeather", null);
-      }
-    );
+    if ("geolocation" in navigator) {
+      context.commit("localWeatherLoading", true);
+      let geoWatchId = navigator.geolocation.watchPosition(function(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        navigator.geolocation.clearWatch(geoWatchId);
+        // import("../../assets/json/currentWeather.json")
+        axios
+          .get(apis.currentWeather, {
+            params: {
+              lat,
+              lon,
+              appid: config.WEATHER_API_KEY,
+              units: "metric"
+            }
+          })
+          .then(response => {
+            context.commit("localWeatherLoading", false);
+            context.commit("localWeather", response.data);
+          })
+          .catch(err => {
+            context.dispatch("triggerSnackbar", {
+              snackbarMessage: "Faild to load local weather: " + err.message,
+              snackbarType: SNACKBAR_TYPE.ERROR
+            });
+            context.commit("localWeatherLoading", false);
+            context.commit("localWeather", null);
+          });
+      });
+    }
   }
 };
 

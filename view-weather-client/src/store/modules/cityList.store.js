@@ -92,7 +92,10 @@ const actions = {
           context.commit("myCityListLoadnig", false);
         })
         .catch(err => {
-          console.log(err);
+          context.dispatch("triggerSnackbar", {
+            snackbarMessage: "Faild to city list: " + err.message,
+            snackbarType: SNACKBAR_TYPE.ERROR
+          });
           context.commit("myCityListLoadnig", false);
         });
     } else {
