@@ -67,14 +67,14 @@ const actions = {
 
 const mutations = {
   login(state, payload) {
-    state.list = payload;
+    state.user = payload;
     state.isLoggedIn = true;
   },
   userAuthToken(satate, payload) {
     state.userAuthToken = payload;
   },
-  logout(state, payload) {
-    state.user = payload;
+  logout(state) {
+    state.user = null;
     state.isLoggedIn = false;
     state.userIdToken = "";
   }

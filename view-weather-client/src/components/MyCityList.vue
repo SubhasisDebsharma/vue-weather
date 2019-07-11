@@ -7,7 +7,7 @@
         v-if="isLoggedIn && (!!addingCityToList || (cities && cities.length))"
         class="height-100pc"
       >
-        <v-flex class="city-list--header subheader">My List:</v-flex>
+        <v-flex class="city-list--header subheader">My City List:</v-flex>
         <v-flex class="city-list--search">
           <v-text-field
             label="Start typing to search"
@@ -53,7 +53,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/class";
+@import "../styles/variables";
 .city-list {
   .city-list--header {
     height: 2.5rem;
@@ -71,6 +71,47 @@
   }
   .remove {
     animation: remove 1s ease-in;
+  }
+
+  .loading {
+    background: #dcdcdc52;
+    pointer-events: none;
+    opacity: 0.7;
+    position: relative;
+    filter: blur(0.7px);
+    &:after {
+      content: "";
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      background: $lightgray;
+      animation: spreadLoad 2s ease-in-out;
+      animation-iteration-count: infinite;
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes spreadLoad {
+    0% {
+      transform: scaleX(0);
+      transform-origin: left;
+    }
+    50% {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    51% {
+      transform: scaleX(1);
+      transform-origin: right;
+    }
+    100% {
+      transform: scaleX(0);
+      transform-origin: right;
+    }
   }
 
   @keyframes remove {
@@ -126,6 +167,7 @@ export default {
     viewCity: function(event, item) {
       this.doSpin(event);
       this.getSearchWeather(item);
+      this.$emit("viewWeather", item);
     },
     removeCity(event, item) {
       this.doRemove(event).then(() => {

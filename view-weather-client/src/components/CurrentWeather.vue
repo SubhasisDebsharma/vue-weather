@@ -12,11 +12,7 @@
                 <img :src="iconUrl" :alt="iconAlt" />
               </v-flex>
               <v-flex class="fs-xxl">{{ temp }}&deg; C</v-flex>
-              <v-flex class="fs-xl text-transform-capitalize">
-                {{
-                description
-                }}
-              </v-flex>
+              <v-flex class="fs-xl text-transform-capitalize">{{ description }}</v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs6>
@@ -36,8 +32,17 @@
 
 <style lang="scss" scoped>
 @import "../styles/class";
-@import "../styles/variables";
+.text-transform-capitalize {
+  text-transform: capitalize;
+}
+.fs-xxl {
+  font-size: 2.3rem;
+}
+.text-small {
+  font-size: 80%;
+}
 </style>
+
 
 <script>
 export default {

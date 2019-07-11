@@ -8,7 +8,7 @@
     :gradient="['#ff9300', '#f5ff00', '#00ffe2']"
     show-labels
     smooth
-    class="sparkline"
+    class="sparkline fw-400"
   >
     <template v-slot:label="item">
       <tspan
@@ -18,17 +18,17 @@
       >&#xf060; &nbsp;</tspan>
 
       <template v-if="list[item.index] === selectedItem">
-        <tspan
-          @click="onSelect(list[item.index])"
-          class="selectedItem"
-        >{{ list[item.index].main && list[item.index].main.temp }}&deg; C</tspan>
+        <tspan @click="onSelect(list[item.index])" class="selectedItem">
+          {{ list[item.index].main && list[item.index].main.temp }}&deg;
+          C
+        </tspan>
       </template>
 
       <template v-else>
-        <tspan
-          @click="onSelect(list[item.index])"
-          class="not-selectedItem"
-        >{{ list[item.index].main && list[item.index].main.temp }}&deg; C</tspan>
+        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">
+          {{ list[item.index].main && list[item.index].main.temp }}&deg;
+          C
+        </tspan>
       </template>
 
       <tspan
@@ -41,33 +41,32 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/class";
 @import "../styles/variables";
 .sparkline {
   background: $themeColor1;
   color: $white;
-  font-weight: 400;
   height: 13rem;
   .selectedItem {
     fill: ivory white;
     font-weight: bold;
-    font-size: 105%;
+    font-size: 1.05rem;
     text-shadow: 2px 2px 5px black;
     cursor: pointer;
   }
   .not-selectedItem {
     fill: $white;
     cursor: pointer;
+    font-size: 1rem;
   }
   .lt,
   .gt {
     font-family: "Font Awesome\ 5 Free";
     font-weight: bold;
-    font-size: 150%;
+    font-size: 1.5rem;
     cursor: pointer;
   }
   .disable {
-    font-size: 100%;
+    font-size: 1rem;
     pointer-events: none;
     fill: lightgray;
   }

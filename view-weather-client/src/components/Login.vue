@@ -1,64 +1,51 @@
 <template>
   <v-content class="login">
     <v-container fluid fill-height>
-      <v-layout
-        wrap
-        align-content-space-around
-        justify-space-around
-        row
-        fill-height
-      >
-        <v-flex xs12 class="view-weather">
+      <v-layout justify-space-around wrap column>
+        <div class="view-weather">
           <span class="view-weather--text">View Weather</span>
-        </v-flex>
-        <v-flex>
+        </div>
+        <div>
           <v-card class="z-index-up login--card">
-            <div class="text-xs-center login-text">
-              <p class="login-text--ad">Get your weather report ready</p>
-              <p>Signin with social media</p>
-            </div>
-
-            <v-card-actions>
-              <div class="vw-align-center">
-                <v-btn
-                  @click="login('facebook')"
-                  title="Signin with Facebook"
-                  fab
-                  dark
-                  large
-                  color="#3b5998"
-                  class="opacity-normal"
-                >
-                  <v-icon dark>fab fa-facebook-f</v-icon>
-                </v-btn>
-                <v-btn
-                  @click="login('gamil')"
-                  title="Signin with Google"
-                  fab
-                  dark
-                  large
-                  color="#DB4437"
-                  class="opacity-normal"
-                >
-                  <v-icon dark>fab fa-google</v-icon>
-                </v-btn>
-              </div>
-            </v-card-actions>
+            <v-container fluid>
+              <v-layout wrap fill-height column class="login-text fw-400">
+                <div class="text-xs-center login-text--ad fs-xl">Get your weather report ready</div>
+                <div class="text-xs-center login-text">
+                  <p>Signin with social media</p>
+                </div>
+                <v-layout align-center justify-center wrap row>
+                  <v-btn
+                    @click="login('facebook')"
+                    title="Signin with Facebook"
+                    fab
+                    dark
+                    large
+                    color="#3b5998"
+                    class="opacity-normal"
+                  >
+                    <v-icon dark>fab fa-facebook-f</v-icon>
+                  </v-btn>
+                  <v-btn
+                    @click="login('gamil')"
+                    title="Signin with Google"
+                    fab
+                    dark
+                    large
+                    color="#DB4437"
+                    class="opacity-normal"
+                  >
+                    <v-icon dark>fab fa-google</v-icon>
+                  </v-btn>
+                </v-layout>
+              </v-layout>
+            </v-container>
           </v-card>
-        </v-flex>
-        <img src alt />
-        <video
-          playsinline
-          autoplay
-          muted
-          loop
-          id="myVideo"
-          :poster="videoPoster"
-        >
-          <source :src="videoURL" type="video/mp4" />
-        </video>
+        </div>
       </v-layout>
     </v-container>
+    <video playsinline autoplay muted loop id="myVideo" :poster="videoPoster">
+      <source :src="videoURL" type="video/mp4" />
+    </video>
   </v-content>
 </template>
 
@@ -94,7 +81,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../styles/class";
 @import "../styles/variables";
 .login {
   // background: linear-gradient(
@@ -133,9 +119,9 @@ export default {
     }
   }
   .login-text {
+    color: rgba($color1, 0.8);
     .login-text--ad {
       text-transform: uppercase;
-      font-size: 2rem;
       padding-top: 1rem;
     }
   }

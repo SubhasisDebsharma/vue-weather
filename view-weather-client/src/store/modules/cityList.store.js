@@ -88,12 +88,12 @@ const actions = {
           }
         })
         .then(response => {
-          context.commit("loadMyCities", Object.values(response.data));
+          context.commit("loadMyCities", response.data);
           context.commit("myCityListLoadnig", false);
         })
         .catch(err => {
           context.dispatch("triggerSnackbar", {
-            snackbarMessage: "Faild to city list: " + err.message,
+            snackbarMessage: "Faild to load city list: " + err.message,
             snackbarType: SNACKBAR_TYPE.ERROR
           });
           context.commit("myCityListLoadnig", false);

@@ -34,24 +34,32 @@ expressApp.post("/addCityToMyList", isAuthorized, (req, res) => {
   firebaseApp
     .database()
     .ref(`myCityList/${req.user.uid}/${req.body.id}`)
-    .set(req.body, error => {
-      if (error) {
-        res.status(500);
-        res.send("Failed to store in firebase");
-      } else {
-        res.send({
-          success: true
-        });
+    .set(
+      Object.assign({}, req.body, { modified: -new Date().getTime() }),
+      error => {
+        if (error) {
+          res.status(500);
+          res.send("Failed to store in firebase");
+        } else {
+          res.send({
+            success: true
+          });
+        }
       }
-    });
+    );
 });
 
 expressApp.get("/getMyCityList", isAuthorized, (req, res) => {
   firebaseApp
     .database()
     .ref(`myCityList/${req.user.uid}`)
-    .once("value", data => {
-      res.send(data || []);
+    .orderByChild("modified")
+    .once("value", snapshot => {
+      const cities = [];
+      snapshot.forEach(child => {
+        cities.push(child.val());
+      });
+      res.send(cities || []);
     });
 });
 
@@ -117,9 +125,23 @@ exports.searchCities = functions.https.onRequest((req, res) => {
     .orderByChild("name")
     .startAt(properInput)
     .limitToFirst(50)
-    .once("value", data => {
-      res.send(data);
-    });
+    .once(
+      "value",
+      snapshot => {
+        const cities = [];
+        snapshot.forEach(child => {
+          cities.push(child.val());
+        });
+        res.set("Access-Control-Allow-Origin", "*");
+        res.send(cities);
+      },
+      error => {
+        if (error) {
+          res.set("Access-Control-Allow-Origin", "*");
+          res.send([]);
+        }
+      }
+    );
 });
 
 exports.widgets = functions.https.onRequest(expressApp);

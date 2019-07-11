@@ -5,7 +5,7 @@
         <v-flex xs12 md8 pa-1 class="vw-home--view-weather">
           <view-weather></view-weather>
         </v-flex>
-        <v-flex xs12 md4>
+        <v-flex xs12 md4 v-if="!smAndDown">
           <v-layout wrap column fill-height>
             <v-flex pa-1 class="vw-home--local-weather">
               <local-weather></local-weather>
@@ -25,7 +25,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/class";
+@import "../styles/variables";
 .vw-home {
   .vw-home--view-weather {
     animation: heightOut 700ms ease;
@@ -69,12 +69,13 @@
     width: 0;
     height: 0;
     display: block;
-    animation: displayHide 4s ease;
+    animation: displayHide 4.5s ease;
     background: linear-gradient(
       to top,
-      rgba($darkblue, 0.7),
-      rgba($gray, 0.7),
-      rgba($lightBlue, 0.7)
+      rgba($black, 0.8),
+      rgba($darkblue, 0.8),
+      rgba($gray, 0.8),
+      rgba($lightBlue, 0.8)
     );
   }
 
@@ -88,7 +89,7 @@
     50% {
       width: 100%;
       height: 100%;
-      opacity: 0.2;
+      opacity: 0.3;
       z-index: 1;
     }
     75% {
@@ -196,6 +197,11 @@ export default {
     ViewWeather,
     LocalWeather,
     MyCityList
+  },
+  computed: {
+    smAndDown: function() {
+      return this.$vuetify.breakpoint.smAndDown;
+    }
   }
 };
 </script>

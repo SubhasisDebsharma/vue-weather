@@ -5,56 +5,43 @@
         <img class="header__logo" :src="image" alt="VueWeather" />
       </router-link>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon
-        :class="{ hidden: !smAndDown }"
-        @click.stop="drawer = !drawer"
-      ></v-toolbar-side-icon>
+      <v-toolbar-side-icon v-if="smAndDown" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
 
-      <v-avatar
-        v-if="isLoggedIn"
-        color="grey lighten-4"
-        :class="{ hidden: smAndDown }"
-        title="John Leider"
-      >
-        <img
-          src="https://randomuser.me/api/portraits/men/85.jpg"
-          alt="avatar"
-        />
+      <v-avatar v-if="isLoggedIn && !smAndDown" color="grey lighten-4" :title="userName">
+        <img :src="userImage" alt="avatar" />
       </v-avatar>
 
-      <div class="space" :class="{ hidden: smAndDown }"></div>
-
-      <v-btn
-        @click="logout()"
-        title="Logout"
-        v-if="isLoggedIn"
-        icon
-        :class="{ hidden: smAndDown }"
-      >
-        <v-icon color="danger">fa-sign-out-alt</v-icon>
+      <v-btn @click="logout()" icon title="Logout" v-if="isLoggedIn && !smAndDown">
+        <v-icon>fa-sign-out-alt</v-icon>
       </v-btn>
 
       <router-link class="txt-dec-none" :to="{ name: 'login' }">
-        <v-btn
-          title="Login"
-          v-if="!isLoggedIn"
-          color="primary"
-          icon
-          :class="{ hidden: smAndDown }"
-        >
+        <v-btn title="Login" v-if="!isLoggedIn && !smAndDown" color="primary" icon>
           <v-icon>fa-sign-in-alt</v-icon>
         </v-btn>
       </router-link>
     </v-toolbar>
 
-    <v-navigation-drawer v-model="drawer" absolute temporary>
-      <drawer-content></drawer-content>
+    <v-navigation-drawer v-if="smAndDown" v-model="drawer" fixed temporary>
+      <drawer-content
+        @close="drawer = !drawer"
+        @logout="logout()"
+        @sideNavSelect="onSideNavSelect($event)"
+        :user="user"
+        :isLoggedIn="isLoggedIn"
+      ></drawer-content>
     </v-navigation-drawer>
+    <bottom-sheet
+      @open="v => openBottomSheet = v"
+      :openBottomSheet="openBottomSheet"
+      :display="bottomSheetDisplay"
+      v-if="smAndDown"
+    ></bottom-sheet>
   </div>
 </template>
 
 <style lang="scss" scoped>
-@import "../../styles/class";
+// @import "../../styles/class";
 @import "../../styles/variables";
 .header {
   background: $headerBgColor;
@@ -66,31 +53,41 @@
 </style>
 
 <script>
-import DrawerContent from "./DrawerContent";
 import { mapGetters, mapActions } from "vuex";
+import DrawerContent from "./DrawerContent";
+import BottomSheet from "./BottomSheet";
 export default {
   data: () => ({
     drawer: null,
-    items: [
-      { title: "Home", icon: "dashboard" },
-      { title: "About", icon: "question_answer" }
-    ],
-    image: require("@/assets/logos/256.png")
+    image: require("@/assets/logos/256.png"),
+    bottomSheetDisplay: "",
+    openBottomSheet: false
   }),
   components: {
-    DrawerContent
+    DrawerContent,
+    BottomSheet
   },
   computed: {
     smAndDown: function() {
       return this.$vuetify.breakpoint.smAndDown;
     },
-    ...mapGetters(["isLoggedIn"])
+    ...mapGetters(["isLoggedIn", "user"]),
+    userImage: function() {
+      return this.user && this.user.photoURL;
+    },
+    userName: function() {
+      return this.user && this.user.displayName;
+    }
   },
   props: {
     source: String
   },
   methods: {
-    ...mapActions(["logout"])
+    ...mapActions(["logout"]),
+    onSideNavSelect(option) {
+      this.bottomSheetDisplay = option;
+      this.openBottomSheet = true;
+    }
   }
 };
 </script>

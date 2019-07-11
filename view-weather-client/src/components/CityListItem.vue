@@ -14,11 +14,7 @@
       </v-btn>
     </v-list-tile-avatar>
 
-    <span
-      class="country no-margin city-item--conuntry"
-      title="Country"
-      v-html="item.country"
-    ></span>
+    <span class="country city-item--conuntry" title="Country" v-html="item.country"></span>
 
     <v-list-tile-content>
       <highlight-text :text="item.name" :highLight="search"></highlight-text>
@@ -40,7 +36,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/class";
 .city-item {
   padding-left: 0;
   .city-item--conuntry {
@@ -48,6 +43,9 @@
   }
   .city-item--delete-avatar {
     min-width: auto;
+  }
+  .scale-85 {
+    transform: scale(0.85);
   }
 }
 </style>

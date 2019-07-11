@@ -4,7 +4,7 @@
       <v-layout column>
         <v-flex shrink class="search-city--header">
           <auto-search row class="search-city--auto-search width-100pc"></auto-search>
-          <div class="search-city--subheader width-100pc">
+          <div class="search-city--subheader fs-xl fw-400 width-100pc">
             <div v-if="searchedCity">
               <v-icon>fa-city</v-icon>
               <span class="search-city--subheader__label pa-1">
@@ -17,7 +17,11 @@
                 <span v-else>Showing</span>
                 result for:
               </span>
-              <span class="country" title="Country">{{ searchedCity && searchedCity.country }}</span>
+              <span class="country" title="Country">
+                {{
+                searchedCity && searchedCity.country
+                }}
+              </span>
               <span>{{ searchedCity && searchedCity.name }}</span>
               <v-btn
                 v-if="isLoggedIn"
@@ -96,7 +100,12 @@
         </v-flex>
 
         <v-flex shrink>
-          <v-layout class="temp-curve" column wrap v-if="searchedWeatherForecast">
+          <v-layout
+            class="temp-curve"
+            column
+            wrap
+            v-if="searchedWeatherForecast && !searchedWeatherForecastLoading"
+          >
             <v-flex shrink class="subheader temp-curve--header fw-400">
               <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon>Temperature Curve:
             </v-flex>
@@ -115,12 +124,10 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/class";
 @import "../styles/variables";
+@import "../styles/class";
 .search-city {
   .search-city--subheader {
-    font-size: 2rem;
-    font-weight: 400;
     min-height: 5rem;
     .search-city--subheader__label {
       font-size: 1rem;

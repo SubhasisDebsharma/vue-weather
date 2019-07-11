@@ -20,10 +20,6 @@
   </v-card>
 </template>
 
-<style lang="scss" scoped>
-@import "../styles/class";
-</style>
-
 <script>
 import { mapGetters } from "vuex";
 import CurrentWeather from "./CurrentWeather";

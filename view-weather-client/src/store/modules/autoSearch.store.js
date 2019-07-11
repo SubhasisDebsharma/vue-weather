@@ -23,8 +23,7 @@ const actions = {
         params: query
       })
       .then(response => {
-        const cities = Object.values(response.data);
-        context.commit("addToAutoSearchList", cities);
+        context.commit("addToAutoSearchList", response.data);
         context.commit("setSearchAPIProgress", false);
       })
       .catch(error => {

@@ -24,20 +24,12 @@
     <template v-slot:item="data">
       <span>
         <span class="country" title="Country">{{ data.item.country }}</span>
-        <highlight-text
-          :text="data.item.name"
-          :highLight="search"
-        ></highlight-text>
+        <highlight-text :text="data.item.name" :highLight="search"></highlight-text>
       </span>
     </template>
   </v-autocomplete>
 </template>
 
-<style lang="scss" scoped>
-@import "../styles/class";
-@import "../styles/variables";
-@import "../styles/components";
-</style>
 <script>
 import { mapActions, mapGetters } from "vuex";
 import HighlightText from "./HighlightText";
@@ -68,7 +60,7 @@ export default {
           }
           return false;
         },
-        500
+        1000
       );
     }
   },

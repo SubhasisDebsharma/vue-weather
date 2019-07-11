@@ -5,13 +5,17 @@ module.exports = {
   sampleLocalWeather:
     "https://samples.openweathermap.org/data/2.5/weather?lat=35&lon=139&appid=b6907d289e10d714a6e88b30761fae22",
   cityAutoComplete:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/dummySearchCities",
+    // "http://localhost:5001/viewweather-a2bc9/us-central1/searchCities",
+    "https://us-central1-viewweather-a2bc9.cloudfunctions.net/searchCities",
   addCityToMyList:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/addCityToMyList",
+    "https://us-central1-viewweather-a2bc9.cloudfunctions.net/widgets/addCityToMyList",
+  // "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/addCityToMyList",
   getMyCityList:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/getMyCityList",
+    "https://us-central1-viewweather-a2bc9.cloudfunctions.net/widgets/getMyCityList",
+  // "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/getMyCityList",
   removeCityFromList:
-    "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/removeCityFromList",
+    "https://us-central1-viewweather-a2bc9.cloudfunctions.net/widgets/removeCityFromList",
+  // "http://localhost:5001/viewweather-a2bc9/us-central1/widgets/removeCityFromList",
   currentWeather: "https://api.openweathermap.org/data/2.5/weather",
   fiveDaysForecast: "https://api.openweathermap.org/data/2.5/forecast"
 };
