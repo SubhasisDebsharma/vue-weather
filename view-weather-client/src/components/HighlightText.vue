@@ -10,7 +10,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/variables";
 .hightlight-text {
   .hightlight-text--matched {
     color: rgba(0, 0, 0, 0.38);

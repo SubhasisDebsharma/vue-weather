@@ -5,18 +5,35 @@
         <img class="header__logo" :src="image" alt="VueWeather" />
       </router-link>
       <v-spacer></v-spacer>
-      <v-toolbar-side-icon v-if="smAndDown" @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-toolbar-side-icon
+        v-if="smAndDown"
+        @click.stop="drawer = !drawer"
+      ></v-toolbar-side-icon>
 
-      <v-avatar v-if="isLoggedIn && !smAndDown" color="grey lighten-4" :title="userName">
+      <v-avatar
+        v-if="isLoggedIn && !smAndDown"
+        color="grey lighten-4"
+        :title="userName"
+      >
         <img :src="userImage" alt="avatar" />
       </v-avatar>
 
-      <v-btn @click="logout()" icon title="Logout" v-if="isLoggedIn && !smAndDown">
+      <v-btn
+        @click="logout()"
+        icon
+        title="Logout"
+        v-if="isLoggedIn && !smAndDown"
+      >
         <v-icon>fa-sign-out-alt</v-icon>
       </v-btn>
 
       <router-link class="txt-dec-none" :to="{ name: 'login' }">
-        <v-btn title="Login" v-if="!isLoggedIn && !smAndDown" color="primary" icon>
+        <v-btn
+          title="Login"
+          v-if="!isLoggedIn && !smAndDown"
+          color="primary"
+          icon
+        >
           <v-icon>fa-sign-in-alt</v-icon>
         </v-btn>
       </router-link>
@@ -32,7 +49,7 @@
       ></drawer-content>
     </v-navigation-drawer>
     <bottom-sheet
-      @open="v => openBottomSheet = v"
+      @open="v => (openBottomSheet = v)"
       :openBottomSheet="openBottomSheet"
       :display="bottomSheetDisplay"
       v-if="smAndDown"
@@ -41,7 +58,6 @@
 </template>
 
 <style lang="scss" scoped>
-// @import "../../styles/class";
 @import "../../styles/variables";
 .header {
   background: $headerBgColor;

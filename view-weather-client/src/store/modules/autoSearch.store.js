@@ -30,13 +30,12 @@ const actions = {
         console.log(error);
         context.commit("setSearchAPIProgress", false);
       });
-  },
-  // eslint-disable-next-line no-unused-vars
-  getCitiesForAutoSearch(context, payload) {
-    // Api call to get all loaded cities
-    // call google auto search api
-    context.commit("addToAutoSearchList", []);
   }
+  // getCitiesForAutoSearch(context) {
+  //   // Api call to get all loaded cities
+  //   // call google auto search api
+  //   context.commit("addToAutoSearchList", []);
+  // }
 };
 
 const mutations = {

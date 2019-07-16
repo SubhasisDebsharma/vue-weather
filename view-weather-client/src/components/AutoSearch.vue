@@ -24,7 +24,10 @@
     <template v-slot:item="data">
       <span>
         <span class="country" title="Country">{{ data.item.country }}</span>
-        <highlight-text :text="data.item.name" :highLight="search"></highlight-text>
+        <highlight-text
+          :text="data.item.name"
+          :highLight="search"
+        ></highlight-text>
       </span>
     </template>
   </v-autocomplete>

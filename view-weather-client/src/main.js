@@ -8,6 +8,7 @@ import "vuetify/dist/vuetify.min.css";
 import Vuetify from "vuetify";
 import "@fortawesome/fontawesome-free/css/all.css";
 import firebaseApp from "./auth/firebase.js";
+import "./styles/_index.scss";
 
 firebaseApp.initializeApp();
 
@@ -18,6 +19,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
-  store,
-  render: h => h(App)
+  render: h => h(App),
+  store
 }).$mount("#app");

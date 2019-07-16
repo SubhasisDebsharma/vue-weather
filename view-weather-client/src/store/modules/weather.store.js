@@ -26,7 +26,6 @@ const actions = {
   getSearchWeather(context, payload) {
     context.commit("searchedCity", payload);
     context.commit("searchedWeatherForecastLoading", true);
-    // import("../../assets/json/fiveDaysWeather.json")
     axios
       .get(apis.fiveDaysForecast, {
         params: {
@@ -50,7 +49,6 @@ const actions = {
         }
       );
     context.commit("searchedCurrentWeatherLoading", true);
-    // import("../../assets/json/currentWeather.json");
     axios
       .get(apis.currentWeather, {
         params: {
@@ -73,16 +71,12 @@ const actions = {
         context.commit("searchedCurrentWeather", null);
       });
   },
-  // eslint-disable-next-line no-unused-vars
-  loadLocalWeather(context, payload) {
-    // Api call to get all loaded cities
+  loadLocalWeather(context) {
     if ("geolocation" in navigator) {
       context.commit("localWeatherLoading", true);
-      let geoWatchId = navigator.geolocation.watchPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(function(position) {
         const lat = position.coords.latitude;
         const lon = position.coords.longitude;
-        navigator.geolocation.clearWatch(geoWatchId);
-        // import("../../assets/json/currentWeather.json")
         axios
           .get(apis.currentWeather, {
             params: {

@@ -3,7 +3,13 @@
     <v-container class="no-gutter bottom-sheet z-index-up">
       <v-layout wrap column>
         <v-flex class="bottom-sheet--close-btn">
-          <v-btn @click="sheet = false" flat icon color="primary" class="vw-align-center">
+          <v-btn
+            @click="sheet = false"
+            flat
+            icon
+            color="primary"
+            class="vw-align-center"
+          >
             <v-icon>fa-angle-down</v-icon>
           </v-btn>
         </v-flex>
@@ -21,7 +27,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../../styles/class";
 @import "../../styles/variables";
 .bottom-sheet {
   background: $white;
@@ -30,7 +35,6 @@
   }
 }
 </style>
-
 
 <script>
 import LocalWeather from "../LocalWeather";

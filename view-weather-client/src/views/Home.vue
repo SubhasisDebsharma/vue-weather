@@ -25,7 +25,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/variables";
+@import "../styles/variables.scss";
 .vw-home {
   .vw-home--view-weather {
     animation: heightOut 700ms ease;

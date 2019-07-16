@@ -40,10 +40,16 @@
         </v-flex>
       </v-layout>
       <v-layout v-else-if="!isLoggedIn" column wrap>
-        <v-flex class="subheader">Please login to create your list of cities...</v-flex>
+        <v-flex class="subheader"
+          >Please login to create your list of cities...</v-flex
+        >
       </v-layout>
       <v-layout v-else-if="myCityListLoadnig">
-        <v-progress-circular indeterminate color="primary" class="vw-align-center"></v-progress-circular>
+        <v-progress-circular
+          indeterminate
+          color="primary"
+          class="vw-align-center"
+        ></v-progress-circular>
       </v-layout>
       <v-layout v-else column wrap>
         <v-flex class="subheader">Add cities to your list</v-flex>
@@ -53,7 +59,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/variables";
+@import "../styles/variables.scss";
 .city-list {
   .city-list--header {
     height: 2.5rem;

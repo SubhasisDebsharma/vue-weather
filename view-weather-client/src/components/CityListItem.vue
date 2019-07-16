@@ -14,7 +14,11 @@
       </v-btn>
     </v-list-tile-avatar>
 
-    <span class="country city-item--conuntry" title="Country" v-html="item.country"></span>
+    <span
+      class="country city-item--conuntry"
+      title="Country"
+      v-html="item.country"
+    ></span>
 
     <v-list-tile-content>
       <highlight-text :text="item.name" :highLight="search"></highlight-text>

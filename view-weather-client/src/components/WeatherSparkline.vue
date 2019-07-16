@@ -15,33 +15,35 @@
         :class="{ lt: true, disable: !canViewPrevious }"
         @click="onArrowClick(-1)"
         v-if="item.index === 0"
-      >&#xf060; &nbsp;</tspan>
+        >&#xf060; &nbsp;</tspan
+      >
 
       <template v-if="list[item.index] === selectedItem">
-        <tspan @click="onSelect(list[item.index])" class="selectedItem">
-          {{ list[item.index].main && list[item.index].main.temp }}&deg;
-          C
-        </tspan>
+        <tspan @click="onSelect(list[item.index])" class="selectedItem"
+          >{{ list[item.index].main && list[item.index].main.temp }}&deg;
+          C</tspan
+        >
       </template>
 
       <template v-else>
-        <tspan @click="onSelect(list[item.index])" class="not-selectedItem">
-          {{ list[item.index].main && list[item.index].main.temp }}&deg;
-          C
-        </tspan>
+        <tspan @click="onSelect(list[item.index])" class="not-selectedItem"
+          >{{ list[item.index].main && list[item.index].main.temp }}&deg;
+          C</tspan
+        >
       </template>
 
       <tspan
         :class="{ gt: true, disable: !canViewNext }"
         @click="onArrowClick(+1)"
         v-if="item.index === 4"
-      >&nbsp; &#xf061;</tspan>
+        >&nbsp; &#xf061;</tspan
+      >
     </template>
   </v-sparkline>
 </template>
 
 <style lang="scss" scoped>
-@import "../styles/variables";
+@import "../styles/variables.scss";
 .sparkline {
   background: $themeColor1;
   color: $white;
@@ -49,24 +51,24 @@
   .selectedItem {
     fill: ivory white;
     font-weight: bold;
-    font-size: 1.05rem;
+    font-size: 0.9rem;
     text-shadow: 2px 2px 5px black;
     cursor: pointer;
   }
   .not-selectedItem {
     fill: $white;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.8rem;
   }
   .lt,
   .gt {
     font-family: "Font Awesome\ 5 Free";
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 1rem;
     cursor: pointer;
   }
   .disable {
-    font-size: 1rem;
+    font-size: 0.8rem;
     pointer-events: none;
     fill: lightgray;
   }

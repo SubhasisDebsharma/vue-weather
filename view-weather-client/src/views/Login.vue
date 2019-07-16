@@ -9,7 +9,9 @@
           <v-card class="z-index-up login--card">
             <v-container fluid>
               <v-layout wrap fill-height column class="login-text fw-400">
-                <div class="text-xs-center login-text--ad fs-xl">Get your weather report ready</div>
+                <div class="text-xs-center login-text--ad fs-xl">
+                  Get your weather report ready
+                </div>
                 <div class="text-xs-center login-text">
                   <p>Signin with social media</p>
                 </div>

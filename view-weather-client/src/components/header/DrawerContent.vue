@@ -8,7 +8,7 @@
           </v-list-tile-avatar>
 
           <v-list-tile-content>
-            <v-list-tile-title>{{userName}}</v-list-tile-title>
+            <v-list-tile-title>{{ userName }}</v-list-tile-title>
           </v-list-tile-content>
           <v-list-tile-action>
             <v-btn @click="$emit('logout')" title="Logout" icon>

@@ -23,7 +23,7 @@
 
 <script>
 import Header from "@/components/header/Header.vue";
-import Snackbar from "@/components/shared/snackbar.vue";
+import Snackbar from "@/components/shared/Snackbar.vue";
 import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
