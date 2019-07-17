@@ -1,5 +1,13 @@
 @import "./variables";
 
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
 .width-100pc {
   width: 100%;
 }

@@ -1,24 +1,7 @@
 <template>
-  <v-list-tile class="bg-hover city-item">
-    <v-list-tile-avatar class="city-item--delete-avatar">
-      <v-btn
-        class="no-gutter scale-85"
-        title="Remove from list"
-        ripple
-        flat
-        icon
-        color="#808080"
-        @click="$emit('removeCity', $event)"
-      >
-        <v-icon>fa-lg fa-trash</v-icon>
-      </v-btn>
-    </v-list-tile-avatar>
-
-    <span
-      class="country city-item--conuntry"
-      title="Country"
-      v-html="item.country"
-    ></span>
+  <v-list-tile @click="$emit('viewCity', $event)" class="bg-hover city-item relative">
+    <span :class="{'highlight-span': true, 'highlight': selected}"></span>
+    <span class="country city-item--conuntry" title="Country" v-html="item.country"></span>
 
     <v-list-tile-content>
       <highlight-text :text="item.name" :highLight="search"></highlight-text>
@@ -26,20 +9,22 @@
 
     <v-list-tile-action>
       <v-btn
-        @click="$emit('viewCity', $event)"
-        icon
+        class="no-gutter scale-85"
+        title="Remove from list"
         ripple
         flat
-        title="View Weather"
-        :color="item === searchedCity ? 'primary' : '#808080'"
+        icon
+        color="#808080"
+        @click.stop="$emit('removeCity', $event)"
       >
-        <v-icon>fa-cloud-sun</v-icon>
+        <v-icon>fa-lg fa-trash</v-icon>
       </v-btn>
     </v-list-tile-action>
   </v-list-tile>
 </template>
 
 <style lang="scss" scoped>
+@import "../styles/variables.scss";
 .city-item {
   padding-left: 0;
   .city-item--conuntry {
@@ -51,6 +36,16 @@
   .scale-85 {
     transform: scale(0.85);
   }
+
+  .highlight-span {
+    width: 1rem;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    &.highlight {
+      background: linear-gradient(to right, $themeColor1, transparent);
+    }
+  }
 }
 </style>
 
@@ -60,6 +55,11 @@ export default {
   props: ["item", "search", "searchedCity"],
   components: {
     HighlightText
+  },
+  computed: {
+    selected() {
+      return this.item === this.searchedCity;
+    }
   }
 };
 </script>
