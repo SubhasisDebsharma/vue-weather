@@ -1,7 +1,9 @@
 <template>
-  <v-list-tile @click="$emit('viewCity', $event)" class="bg-hover city-item relative">
-    <span :class="{ 'highlight-span': true, highlight: selected }"></span>
-
+  <v-list-tile
+    @click="$emit('viewCity', $event)"
+    class="bg-hover city-item relative"
+    :selected="selected"
+  >
     <v-list-tile-content>
       <highlight-text :text="item.name" :highLight="search">
         <template v-slot:after>
@@ -36,18 +38,16 @@
   .scale-85 {
     transform: scale(0.85);
   }
-
-  .highlight-span {
-    width: 1rem;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    &.highlight {
-      background: linear-gradient(to right, $themeColor1, transparent);
-    }
+}
+</style>
+<style lang="scss">
+.city-item {
+  [selected="selected"] {
+    background: whitesmoke;
   }
 }
 </style>
+
 
 <script>
 import HighlightText from "./HighlightText";
