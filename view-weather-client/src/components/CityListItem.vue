@@ -1,7 +1,14 @@
 <template>
-  <v-list-tile @click="$emit('viewCity', $event)" class="bg-hover city-item relative">
-    <span :class="{'highlight-span': true, 'highlight': selected}"></span>
-    <span class="country city-item--conuntry" title="Country" v-html="item.country"></span>
+  <v-list-tile
+    @click="$emit('viewCity', $event)"
+    class="bg-hover city-item relative"
+  >
+    <span :class="{ 'highlight-span': true, highlight: selected }"></span>
+    <span
+      class="country city-item--conuntry"
+      title="Country"
+      v-html="item.country"
+    ></span>
 
     <v-list-tile-content>
       <highlight-text :text="item.name" :highLight="search"></highlight-text>

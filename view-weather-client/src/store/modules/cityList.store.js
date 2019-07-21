@@ -43,9 +43,10 @@ const actions = {
         })
         .catch(err => {
           context.dispatch("triggerSnackbar", {
-            snackbarMessage: err.message,
+            snackbarMessage: err.message + " : " + "Please Check later.",
             snackbarType: SNACKBAR_TYPE.ERROR
           });
+          context.commit("addCityToMyList", [payload]);
           context.commit("addingCityToList", null);
         });
     }

@@ -9,12 +9,14 @@
           <v-flex xs6>
             <v-layout column class="text-xs-center">
               <v-flex>
-                <img :src="iconUrl" :alt="iconAlt" />
+                <img class="weather-icon" :src="iconUrl" :alt="iconAlt" />
               </v-flex>
               <v-flex class="fs-xxl">{{ temp }}&deg; C</v-flex>
-              <v-flex class="fs-xl text-transform-capitalize">{{
+              <v-flex class="fs-xl text-transform-capitalize">
+                {{
                 description
-              }}</v-flex>
+                }}
+              </v-flex>
             </v-layout>
           </v-flex>
           <v-flex xs6>
@@ -65,7 +67,7 @@ export default {
       return this.weather && this.weather.Clear;
     },
     iconUrl: function() {
-      return `http://openweathermap.org/img/wn/${this.icon}@2x.png`;
+      return `https://openweathermap.org/img/wn/${this.icon}@2x.png`;
     },
     icon: function() {
       return this.weather && this.weather.icon;

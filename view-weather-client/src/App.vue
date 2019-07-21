@@ -39,8 +39,25 @@ export default {
       "loadLocalWeather",
       "loadSavedCity",
       "getSearchWeather",
-      "loadMyCities"
-    ])
+      "loadMyCities",
+      "triggerSnackbar"
+    ]),
+    listenForNetworkStatus() {
+      window.onoffline = this.onoffline;
+    },
+    ononline() {
+      this.triggerSnackbar({
+        snackbarMessage: "Now you are online.",
+        snackbarType: "success"
+      });
+    },
+    onoffline() {
+      window.ononline = this.ononline;
+      this.triggerSnackbar({
+        snackbarMessage: "You are offline now.",
+        snackbarType: "warning"
+      });
+    }
   },
   mounted: function() {
     this.silentLogin();
@@ -49,6 +66,7 @@ export default {
     if (this.savedCity) {
       this.getSearchWeather(this.savedCity);
     }
+    this.listenForNetworkStatus();
   },
   watch: {
     isLoggedIn: function() {
