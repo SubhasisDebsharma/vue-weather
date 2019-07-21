@@ -1,11 +1,13 @@
 <template>
-  <span class="hightlight-text">
+  <span class="hightlight-text inline">
     <template v-if="!!matchedText">
-      <span>{{ firstText }}</span>
-      <span class="hightlight-text--matched">{{ matchedText }}</span>
-      <span>{{ lastText }}</span>
+      <span class="inline">{{ firstText }}</span>
+      <span class="hightlight-text--matched inline">{{ matchedText }}</span>
+      <span class="inline">{{ lastText }}</span>
     </template>
     <template v-else>{{ text }}</template>
+    <span v-if="hasAfterSlot" class="sm-space"></span>
+    <slot name="after"></slot>
   </span>
 </template>
 
@@ -53,6 +55,9 @@ export default {
       const endIndex = startIndex + lowHighLightText.length;
       const lastText = text.substring(endIndex);
       return lastText;
+    },
+    hasAfterSlot: function() {
+      return !!this.$slots.after;
     }
   }
 };

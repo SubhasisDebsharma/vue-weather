@@ -18,16 +18,18 @@
     @input="onInput($event)"
   >
     <template v-slot:selection="data">
-      <span class="country" title="Country">{{ data.item.country }}</span>
-      <span>{{ data.item.name }}</span>
+      <span>
+        {{ data.item.name }}
+        <sub class="country" title="Country">{{ data.item.country }}</sub>
+      </span>
     </template>
     <template v-slot:item="data">
       <span>
-        <span class="country" title="Country">{{ data.item.country }}</span>
-        <highlight-text
-          :text="data.item.name"
-          :highLight="search"
-        ></highlight-text>
+        <highlight-text :text="data.item.name" :highLight="search">
+          <template v-slot:after>
+            <sub class="country" title="Country">{{ data.item.country }}</sub>
+          </template>
+        </highlight-text>
       </span>
     </template>
   </v-autocomplete>

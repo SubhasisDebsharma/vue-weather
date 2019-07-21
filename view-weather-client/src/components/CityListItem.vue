@@ -1,17 +1,13 @@
 <template>
-  <v-list-tile
-    @click="$emit('viewCity', $event)"
-    class="bg-hover city-item relative"
-  >
+  <v-list-tile @click="$emit('viewCity', $event)" class="bg-hover city-item relative">
     <span :class="{ 'highlight-span': true, highlight: selected }"></span>
-    <span
-      class="country city-item--conuntry"
-      title="Country"
-      v-html="item.country"
-    ></span>
 
     <v-list-tile-content>
-      <highlight-text :text="item.name" :highLight="search"></highlight-text>
+      <highlight-text :text="item.name" :highLight="search">
+        <template v-slot:after>
+          <sub class="country city-item--conuntry" title="Country" v-html="item.country"></sub>
+        </template>
+      </highlight-text>
     </v-list-tile-content>
 
     <v-list-tile-action>
@@ -34,9 +30,6 @@
 @import "../styles/variables.scss";
 .city-item {
   padding-left: 0;
-  .city-item--conuntry {
-    margin-right: 1rem;
-  }
   .city-item--delete-avatar {
     min-width: auto;
   }

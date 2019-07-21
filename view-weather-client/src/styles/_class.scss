@@ -7,6 +7,13 @@
 .absolute {
   position: absolute;
 }
+.inline {
+  display: inline;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
 
 .width-100pc {
   width: 100%;
@@ -52,4 +59,8 @@
   &:hover {
     background: #eeeeee;
   }
+}
+
+.sm-space {
+  margin-left: 0.5rem;
 }

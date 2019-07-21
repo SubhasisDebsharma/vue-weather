@@ -3,10 +3,7 @@
     <v-container grid-list-sm fluid fill-height>
       <v-layout column>
         <v-flex shrink class="search-city--header">
-          <auto-search
-            row
-            class="search-city--auto-search width-100pc"
-          ></auto-search>
+          <auto-search row class="search-city--auto-search width-100pc"></auto-search>
           <div class="search-city--subheader fs-xl fw-400 width-100pc">
             <div v-if="searchedCity">
               <v-icon>fa-city</v-icon>
@@ -16,15 +13,17 @@
                     searchedWeatherForecastLoading &&
                       searchedCurrentWeatherLoading
                   "
-                  >Searching</span
-                >
+                >Searching</span>
                 <span v-else>Showing</span>
                 result for:
               </span>
-              <span class="country" title="Country">
-                {{ searchedCity && searchedCity.country }}
+              <span>
+                {{searchedCity && searchedCity.name}}
+                <sub
+                  class="country"
+                  title="Country"
+                >{{ searchedCity && searchedCity.country }}</sub>
               </span>
-              <span>{{ searchedCity && searchedCity.name }}</span>
               <v-btn
                 v-if="isLoggedIn"
                 title="Add to My List"
@@ -98,9 +97,7 @@
                       ></v-select>
                     </v-flex>
                     <v-flex xs12>
-                      <current-weather
-                        :details="selectedForecastItem"
-                      ></current-weather>
+                      <current-weather :details="selectedForecastItem"></current-weather>
                     </v-flex>
                   </v-layout>
                 </template>
@@ -117,8 +114,7 @@
             v-if="searchedWeatherForecast && !searchedWeatherForecastLoading"
           >
             <v-flex shrink class="subheader temp-curve--header fw-400">
-              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon
-              >Temperature Curve:
+              <v-icon class="temp-curve--header__icon">fa-chart-line</v-icon>Temperature Curve:
             </v-flex>
             <v-flex>
               <weather-sparkline
