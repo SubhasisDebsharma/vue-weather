@@ -11,7 +11,7 @@ if (workbox) {
 if (self.IndexedDB) {
   console.log("IndexedDB is supported");
 }
-workbox.setConfig({ debug: true });
+// workbox.setConfig({ debug: true });
 workbox.core.setCacheNameDetails({
   prefix: "view-weather",
   suffix: "v1"
@@ -86,18 +86,6 @@ workbox.routing.registerRoute(
   "DELETE"
 );
 
-// workbox.routing.registerRoute(
-//   /.*searchCities.*/,
-//   new workbox.strategies.CacheFirst({
-//     cacheName: "searched-cities",
-//     plugins: [
-//       new workbox.cacheableResponse.Plugin({
-//         statuses: [0, 200]
-//       })
-//     ]
-//   })
-// );
-
 const idbConf = {
   dbName: "view-weather",
   version: 1
@@ -107,11 +95,9 @@ async function createOrGetDbStore(storeName) {
   return new Promise((resolve, reject) => {
     const request = self.indexedDB.open(idbConf.dbName, idbConf.version);
     request.onerror = function(event) {
-      console.log("[onerror]", request.error);
       reject(request.error);
     };
     request.onsuccess = function(event) {
-      console.log("[onsuccess]", request.result);
       const db = event.target.result; // === request.result
       const transaction = db.transaction(storeName, "readwrite");
       const store = transaction.objectStore(storeName);
@@ -150,7 +136,6 @@ async function putDataIntoStore(storeName, key, data) {
 }
 
 searchCityHandler = async ({ url, event }) => {
-  console.log(url, event);
   const storeName = "searched-cities";
 
   try {
@@ -167,10 +152,8 @@ searchCityHandler = async ({ url, event }) => {
       }
     };
     return new Response(JSON.stringify(data), reponseOptions);
-    // return Promise.resolve(data);
   } catch (err) {
     return fetch(event.request).then(response => {
-      console.log("response> ", response);
       if (response.status === 200) {
         response
           .clone()
